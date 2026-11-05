@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante | Sistema de Gestión</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/platos.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">R</span>
+            <div>
+                <h1>Restaurante</h1>
+                <p>Sistema de gestión</p>
+            </div>
+        </div>
+
+        <span class="connection">
+            <span class="connection-dot"></span>
+            Sistema de Gestión para Restaurante
+        </span>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <p class="menu-title">MENÚ PRINCIPAL</p>
+
+            <details class="menu-group">
+                <summary>Recibo de caja</summary>
+                <button class="submenu-item" data-vista="cliente" type="button">
+                    Cliente
+                </button>
+                <button class="submenu-item" data-vista="tipo-identidad" type="button">
+                    Tipo de identidad
+                </button>
+            </details>
+
+            <details class="menu-group" open>
+                <summary>Pedido</summary>
+                <button class="submenu-item active" data-vista="platos" type="button">
+                    Platos
+                </button>
+                <button class="submenu-item" data-vista="categorias" type="button">
+                    Categorías
+                </button>
+                <button class="submenu-item" data-vista="materias-primas" type="button">
+                    Materias primas
+                </button>
+                <button class="submenu-item" data-vista="unidades-medida" type="button">
+                    Unidades de medida
+                </button>
+            </details>
+
+            <details class="menu-group">
+                <summary>Comprobante de egreso</summary>
+                <button class="submenu-item" data-vista="concepto-pago" type="button">
+                    Concepto de pago
+                </button>
+                <button class="submenu-item" data-vista="forma-pago" type="button">
+                    Forma de pago
+                </button>
+                <button class="submenu-item" data-vista="inicio-sesion" type="button">
+                    Inicio de sesión
+                </button>
+            </details>
+
+            <details class="menu-group">
+                <summary>PQRS</summary>
+                <button class="submenu-item" data-vista="usuario" type="button">
+                    Usuario
+                </button>
+                <button class="submenu-item" data-vista="rol" type="button">
+                    Rol
+                </button>
+                <button class="submenu-item" data-vista="tipo-pqrs" type="button">
+                    Tipo de PQRS
+                </button>
+            </details>
+
+            <div class="sidebar-footer">
+                Sistema de Gestión para Restaurante
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="page-heading">
+                <div>
+                    <p class="eyebrow" id="moduloEtiqueta">MÓDULO PEDIDO</p>
+                    <h2 id="tituloVista">Gestión de platos</h2>
+                    <p class="subtitle" id="descripcionVista">
+                        Consulta y administra los platos del restaurante.
+                    </p>
+                </div>
+
+                <button id="btnNuevo" class="button button-primary" type="button">
+                    + Nuevo plato
+                </button>
+            </section>
+
+            <section id="contenidoPlatos">
+                <section class="stats">
+                    <article class="stat-card">
+                        <span class="stat-label">Platos registrados</span>
+                        <strong id="totalPlatos">0</strong>
+                        <span class="stat-description">Registros en el sistema</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <span class="stat-label">Platos activos</span>
+                        <strong id="platosActivos">0</strong>
+                        <span class="stat-description">Según el estado registrado</span>
+                    </article>
+                </section>
+
+                <section id="formSection" class="panel hidden">
+                    <div class="panel-heading">
+                        <div>
+                            <h3 id="formTitle">Registrar plato</h3>
+                            <p>Completa la información del plato.</p>
+                        </div>
+
+                        <button id="btnCerrar" class="button button-light" type="button">
+                            Cerrar
+                        </button>
+                    </div>
+
+                    <form id="platoForm">
+                        <input type="hidden" id="idPlato">
+
+                        <div class="form-grid">
+                            <label>
+                                Descripción del plato
+                                <input id="descripcion" type="text" maxlength="150"
+                                    placeholder="Ej. Arroz mixto" required>
+                            </label>
+
+                            <label>
+                                Precio
+                                <input id="precio" type="number" min="0.01"
+                                    step="0.01" placeholder="Ej. 18000" required>
+                            </label>
+
+                            <label>
+                                ID del estado
+                                <input id="idEstado" type="number" min="1"
+                                    step="1" placeholder="Ej. 1" required>
+                            </label>
+                        </div>
+
+                        <p class="form-note">
+                            Ingresa un ID de estado válido según los registros de tu base de datos.
+                        </p>
+
+                        <div class="form-actions">
+                            <button id="btnCancelar" class="button button-light" type="button">
+                                Cancelar
+                            </button>
+
+                            <button class="button button-primary" type="submit">
+                                Guardar plato
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Listado de platos</h3>
+                            <p>Información consultada desde la base de datos.</p>
+                        </div>
+
+                        <button id="btnActualizar" class="button button-light" type="button">
+                            Actualizar listado
+                        </button>
+                    </div>
+
+                    <div class="search-box">
+                        <input id="buscar" type="search"
+                            placeholder="Buscar por descripción o ID...">
+                    </div>
+
+                    <div id="mensaje" class="message hidden" role="status"></div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Estado ID</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaPlatos">
+                                <tr>
+                                    <td colspan="5">Cargando platos...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="vistaPendiente" class="panel hidden">
+                <div class="panel-heading">
+                    <div>
+                        <h3 id="pendienteTitulo">Módulo en preparación</h3>
+                        <p id="pendienteDescripcion">
+                            Esta vista se conectará con su tabla correspondiente.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    La vista está preparada para su desarrollo. Los formularios y
+                    registros se conectarán a la base de datos en los siguientes pasos.
+                </p>
+            </section>
+
+            <footer class="page-footer">
+                Sistema de Gestión para Restaurante
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
