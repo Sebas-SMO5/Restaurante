@@ -1,8 +1,8 @@
 
 package com.restaurante.backend_restaurante.Controller;
 
-import com.restaurante.backend_restaurante.Plato;
 import com.restaurante.backend_restaurante.DAO.PlatoDAO;
+import com.restaurante.backend_restaurante.Model.Plato;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

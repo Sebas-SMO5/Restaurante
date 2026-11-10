@@ -1,4 +1,4 @@
-package com.restaurante.backend_restaurante;
+package com.restaurante.backend_restaurante.Model;
 
 public class Plato {
 

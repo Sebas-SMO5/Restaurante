@@ -1,9 +1,10 @@
 
 package com.restaurante.backend_restaurante.DAO;
 
-import com.restaurante.backend_restaurante.Plato;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.restaurante.backend_restaurante.Model.Plato;
 
 import java.util.List;
 
