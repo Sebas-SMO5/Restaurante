@@ -1,0 +1,136 @@
+
+<section id="vistaCategorias">
+
+    <section class="stats">
+        <article class="stat-card">
+            <span class="stat-label">Categorías registradas</span>
+            <strong id="totalCategorias">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Categorías activas</span>
+            <strong id="categoriasActivas">0</strong>
+            <span class="stat-description">Según el estado registrado</span>
+        </article>
+    </section>
+
+    <section id="categoriaFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="categoriaFormTitle">Registrar categoría</h3>
+                <p>Completa la información de la categoría.</p>
+            </div>
+        </div>
+
+        <form id="categoriaForm">
+            <input type="hidden" id="categoriaId">
+
+            <div class="form-grid">
+                <label>
+                    Nombre
+                    <input
+                        type="text"
+                        id="categoriaNombre"
+                        maxlength="100"
+                        placeholder="Nombre de la categoría"
+                        required
+                    >
+                </label>
+
+                <label>
+                    Estado
+                    <select id="categoriaEstado" required>
+                        <option value="">Seleccionar estado</option>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </label>
+
+                <label>
+                    Descripción
+                    <textarea
+                        id="categoriaDescripcion"
+                        rows="3"
+                        maxlength="255"
+                        placeholder="Descripción de la categoría"
+                    ></textarea>
+                </label>
+            </div>
+
+            <div id="categoriaMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button
+                    type="button"
+                    class="button button-light"
+                    id="btnCancelarCategoria">
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                    id="btnGuardarCategoria">
+                    Guardar categoría
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de categorías</h3>
+                <p>Consulta, busca y actualiza las categorías registradas en el restaurante.</p>
+            </div>
+
+            <div class="form-actions">
+                <button
+                    type="button"
+                    class="button button-light"
+                    id="btnActualizarCategorias">
+                    Actualizar
+                </button>
+
+                <button
+                    type="button"
+                    class="button button-primary"
+                    id="btnNuevaCategoria">
+                    + Nueva categoría
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="search"
+                id="buscarCategoria"
+                placeholder="Buscar por nombre o descripción..."
+            >
+        </div>
+
+        <div id="mensajeCategorias" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaCategorias">
+                    <tr>
+                        <td colspan="5">Cargando categorías...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

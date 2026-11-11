@@ -1,0 +1,122 @@
+
+<section id="vistaClientes">
+    <section class="stats">
+        <article class="stat-card">
+            <span class="stat-label">Clientes registrados</span>
+            <strong id="totalClientes">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Clientes activos</span>
+            <strong id="clientesActivos">0</strong>
+            <span class="stat-description">Según el estado registrado</span>
+        </article>
+    </section>
+
+    <section id="clienteFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="clienteFormTitle">Registrar cliente</h3>
+                <p>Completa la información del cliente.</p>
+            </div>
+        </div>
+
+        <form id="clienteForm">
+            <input type="hidden" id="clienteId">
+
+            <div class="form-grid">
+                <label>
+                    Nombre
+                    <input id="cliNombre" type="text" maxlength="100" required>
+                </label>
+
+                <label>
+                    Apellidos
+                    <input id="cliApellidos" type="text" maxlength="100" required>
+                </label>
+
+                <label>
+                    Dirección
+                    <input id="cliDireccion" type="text" maxlength="200">
+                </label>
+
+                <label>
+                    Teléfono
+                    <input id="cliTelefono" type="text" maxlength="30">
+                </label>
+
+                <label>
+                    Correo electrónico
+                    <input id="cliCorreo" type="email" maxlength="150">
+                </label>
+
+                <label>
+                    Estado
+                    <input id="cliEstado" type="text" maxlength="30" required>
+                </label>
+            </div>
+
+            <div id="clienteMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarCliente" class="button button-light" type="button">
+                    Cancelar
+                </button>
+
+                <button id="btnGuardarCliente" class="button button-primary" type="submit">
+                    Guardar cliente
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de clientes</h3>
+                <p>Consulta, busca y actualiza la información de los clientes.</p>
+            </div>
+
+            <div class="form-actions">
+                <button id="btnActualizarClientes" class="button button-light" type="button">
+                    Actualizar
+                </button>
+
+                <button id="btnNuevoCliente" class="button button-primary" type="button">
+                    + Nuevo cliente
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input id="buscarCliente" type="search"
+                placeholder="Buscar por nombre, apellidos, correo o teléfono...">
+        </div>
+
+        <div id="mensajeClientes" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaClientes">
+                    <tr>
+                        <td colspan="8">Cargando clientes...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</section>

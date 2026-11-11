@@ -1,0 +1,134 @@
+
+<section id="vistaTipoIdentidad">
+
+    <section class="stats">
+        <article class="stat-card">
+            <span class="stat-label">Tipos de identidad registrados</span>
+            <strong id="totalTiposIdentidad">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Tipos de identidad activos</span>
+            <strong id="tiposIdentidadActivos">0</strong>
+            <span class="stat-description">Según el estado registrado</span>
+        </article>
+    </section>
+
+    <section id="tipoIdentidadFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tipoIdentidadFormTitle">Registrar tipo de identidad</h3>
+                <p>Completa la información del tipo de identidad.</p>
+            </div>
+        </div>
+
+        <form id="tipoIdentidadForm">
+            <input type="hidden" id="tipoIdentidadId">
+
+            <div class="form-grid">
+                <label>
+                    Descripción
+                    <input
+                        type="text"
+                        id="tipoIdentidadDescripcion"
+                        maxlength="100"
+                        placeholder="Ej. Cédula de ciudadanía"
+                        required>
+                </label>
+
+                <label>
+                    Sigla
+                    <input
+                        type="text"
+                        id="tipoIdentidadSigla"
+                        maxlength="20"
+                        placeholder="Ej. CC"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="tipoIdentidadEstado" required>
+                        <option value="">Seleccionar estado</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="tipoIdentidadMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button
+                    type="button"
+                    id="btnCancelarTipoIdentidad"
+                    class="button button-light">
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    id="btnGuardarTipoIdentidad"
+                    class="button button-primary">
+                    Guardar tipo de identidad
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de tipos de identidad</h3>
+                <p>Consulta y administra los tipos de identidad registrados.</p>
+            </div>
+
+            <div class="form-actions">
+                <button
+                    type="button"
+                    id="btnActualizarTiposIdentidad"
+                    class="button button-light">
+                    Actualizar
+                </button>
+
+                <button
+                    type="button"
+                    id="btnNuevoTipoIdentidad"
+                    class="button button-primary">
+                    + Nuevo tipo
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="search"
+                id="buscarTipoIdentidad"
+                placeholder="Buscar por descripción o sigla...">
+        </div>
+
+        <div id="mensajeTiposIdentidad" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Sigla</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaTiposIdentidad">
+                    <tr>
+                        <td colspan="5">Cargando tipos de identidad...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>
