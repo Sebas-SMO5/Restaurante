@@ -1,13 +1,27 @@
 package com.restaurante.backend_restaurante.Model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Plato {
 
-    private int idPlato;
-    private int idEstado;
-    private String descripcion;
-    private float precio;
+    int idPlato;
+    int idEstado;
+    String descripcion;
+    float precio;
 
     public Plato() {
+    }
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public Plato(
+            @JsonProperty("descripcion") String descripcion,
+            @JsonProperty("precio") float precio,
+            @JsonProperty("idEstado") int idEstado) {
+
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.idEstado = idEstado;
     }
 
     public Plato(int idPlato, int idEstado, String descripcion, float precio) {
