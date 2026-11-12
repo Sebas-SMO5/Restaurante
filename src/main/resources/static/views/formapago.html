@@ -1,0 +1,96 @@
+
+<section id="vistaFormasPago" class="vista-contenido">
+
+    <div class="encabezado-vista">
+        <div>
+            <h2>Formas de pago</h2>
+            <p>Administra las formas de pago registradas en el sistema.</p>
+        </div>
+
+        <button type="button" id="btnNuevaFormaPago">
+            Nueva forma de pago
+        </button>
+    </div>
+
+    <div class="contenedor-estadisticas">
+        <div class="tarjeta-estadistica">
+            <h3>Total de formas de pago</h3>
+            <span id="totalFormasPago">0</span>
+        </div>
+
+        <div class="tarjeta-estadistica">
+            <h3>Activas</h3>
+            <span id="formasPagoActivas">0</span>
+        </div>
+
+        <div class="tarjeta-estadistica">
+            <h3>Inactivas</h3>
+            <span id="formasPagoInactivas">0</span>
+        </div>
+    </div>
+
+    <div id="formaPagoFormSection" hidden>
+        <h3 id="tituloFormularioFormaPago">Nueva forma de pago</h3>
+
+        <form id="formaPagoForm">
+
+            <div>
+                <label for="formaPagoId">Código</label>
+                <input type="number" id="formaPagoId" min="1" required>
+            </div>
+
+            <div>
+                <label for="formaPagoDescripcion">Descripción</label>
+                <input type="text" id="formaPagoDescripcion" maxlength="100" required>
+            </div>
+
+            <div>
+                <label for="formaPagoEstado">Estado</label>
+                <select id="formaPagoEstado" required>
+                    <option value="">Seleccione un estado</option>
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" id="btnGuardarFormaPago">Guardar</button>
+                <button type="button" id="btnCancelarFormaPago">Cancelar</button>
+            </div>
+
+            <p id="formaPagoMensaje"></p>
+
+        </form>
+    </div>
+
+    <div class="contenedor-tabla">
+
+        <div>
+            <h3>Listado de formas de pago</h3>
+            <input
+                type="text"
+                id="buscarFormaPago"
+                placeholder="Buscar forma de pago..."
+            >
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaFormasPago">
+                <tr>
+                    <td colspan="4">Cargando formas de pago...</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</section>

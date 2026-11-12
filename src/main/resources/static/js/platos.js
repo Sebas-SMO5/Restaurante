@@ -300,6 +300,27 @@ async function cargarVistaConceptos() {
     }
 }
 
+async function cargarVistaFormaPago() {
+    try {
+        const respuesta = await fetch("/views/forma-pago.html");
+
+        if (!respuesta.ok) {
+            throw new Error("No fue posible cargar la vista de formas de pago.");
+        }
+
+        contenedorVistaExterna.innerHTML = await respuesta.text();
+
+        if (typeof window.inicializarFormasPago !== "function") {
+            throw new Error("No se encontró forma-pago.js o su función de inicialización.");
+        }
+
+        window.inicializarFormasPago();
+
+    } catch (error) {
+        mostrarErrorVista(error);
+    }
+}
+
 function mostrarErrorVista(error) {
     contenedorVistaExterna.innerHTML = `
         <div class="message error">${escaparHTML(error.message)}</div>
@@ -374,6 +395,11 @@ function seleccionarVista(nombre) {
 
     if (nombre === "concepto-pago") {
         cargarVistaConceptos();
+        return;
+    }
+
+    if (nombre === "forma-pago") {
+        cargarVistaFormaPago();
         return;
     }
 
