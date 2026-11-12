@@ -146,6 +146,7 @@ function mostrarPlatos() {
                 <td colspan="5">No hay platos para mostrar.</td>
             </tr>
         `;
+        actualizarEstadisticas();
         return;
     }
 
@@ -204,17 +205,35 @@ async function cargarVistaClientes() {
 
         contenedorVistaExterna.innerHTML = await respuesta.text();
 
-        if (typeof inicializarClientes !== "function") {
-            throw new Error("No se encontró la función de inicialización de clientes.");
+        if (typeof window.inicializarClientes !== "function") {
+            throw new Error("No se encontró clientes.js o su función de inicialización.");
         }
 
-        inicializarClientes();
+        window.inicializarClientes();
 
     } catch (error) {
-        contenedorVistaExterna.innerHTML = `
-            <div class="message error">${escaparHTML(error.message)}</div>
-        `;
-        console.error(error);
+        mostrarErrorVista(error);
+    }
+}
+
+async function cargarVistaTipoIdentidad() {
+    try {
+        const respuesta = await fetch("/views/tipo-identidad.html");
+
+        if (!respuesta.ok) {
+            throw new Error("No fue posible cargar la vista de tipos de identidad.");
+        }
+
+        contenedorVistaExterna.innerHTML = await respuesta.text();
+
+        if (typeof window.inicializarTipoIdentidad !== "function") {
+            throw new Error("No se encontró tipo-identidad.js o su función de inicialización.");
+        }
+
+        window.inicializarTipoIdentidad();
+
+    } catch (error) {
+        mostrarErrorVista(error);
     }
 }
 
@@ -229,17 +248,64 @@ async function cargarVistaCategorias() {
         contenedorVistaExterna.innerHTML = await respuesta.text();
 
         if (typeof window.inicializarCategorias !== "function") {
-            throw new Error("No se encontró categorias.js. Verifica que el archivo esté cargado en index.html.");
+            throw new Error("No se encontró categorias.js o su función de inicialización.");
         }
 
         window.inicializarCategorias();
 
     } catch (error) {
-        contenedorVistaExterna.innerHTML = `
-            <div class="message error">${escaparHTML(error.message)}</div>
-        `;
-        console.error(error);
+        mostrarErrorVista(error);
     }
+}
+
+async function cargarVistaMateriasPrimas() {
+    try {
+        const respuesta = await fetch("/views/materias-primas.html");
+
+        if (!respuesta.ok) {
+            throw new Error("No fue posible cargar la vista de materias primas.");
+        }
+
+        contenedorVistaExterna.innerHTML = await respuesta.text();
+
+        if (typeof window.inicializarMateriasPrimas !== "function") {
+            throw new Error("No se encontró materias-primas.js o su función de inicialización.");
+        }
+
+        window.inicializarMateriasPrimas();
+
+    } catch (error) {
+        mostrarErrorVista(error);
+    }
+}
+
+async function cargarVistaConceptos() {
+    try {
+        const respuesta = await fetch("/views/concepto-pago.html");
+
+        if (!respuesta.ok) {
+            throw new Error("No fue posible cargar la vista de conceptos de pago.");
+        }
+
+        contenedorVistaExterna.innerHTML = await respuesta.text();
+
+        if (typeof window.inicializarConceptos !== "function") {
+            throw new Error("No se encontró concepto-pago.js o su función de inicialización.");
+        }
+
+        window.inicializarConceptos();
+
+    } catch (error) {
+        mostrarErrorVista(error);
+    }
+}
+
+function mostrarErrorVista(error) {
+    contenedorVistaExterna.innerHTML = `
+        <div class="message error">${escaparHTML(error.message)}</div>
+    `;
+
+    console.error(error);
 }
 
 function mostrarVistaPendiente(vista) {
@@ -252,7 +318,7 @@ function mostrarVistaPendiente(vista) {
                 </div>
             </div>
             <div class="message">
-                Esta vista está pendiente de conexión con su controlador y endpoint correspondiente.
+                Esta vista está pendiente de desarrollo.
             </div>
         </section>
     `;
@@ -291,8 +357,23 @@ function seleccionarVista(nombre) {
         return;
     }
 
+    if (nombre === "tipo-identidad") {
+        cargarVistaTipoIdentidad();
+        return;
+    }
+
     if (nombre === "categorias") {
         cargarVistaCategorias();
+        return;
+    }
+
+    if (nombre === "materias-primas") {
+        cargarVistaMateriasPrimas();
+        return;
+    }
+
+    if (nombre === "concepto-pago") {
+        cargarVistaConceptos();
         return;
     }
 

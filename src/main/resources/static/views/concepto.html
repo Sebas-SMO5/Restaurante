@@ -1,0 +1,88 @@
+
+<section id="vistaConceptos" class="vista-contenido">
+    <div class="vista-header">
+        <div>
+            <h2>Conceptos de pago</h2>
+            <p>Administra los conceptos utilizados en los comprobantes de egreso.</p>
+        </div>
+        <button type="button" id="btnNuevoConcepto" class="btn-primary">Nuevo concepto</button>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <span>Total de conceptos</span>
+            <strong id="totalConceptos">0</strong>
+        </div>
+        <div class="stat-card">
+            <span>Conceptos activos</span>
+            <strong id="conceptosActivos">0</strong>
+        </div>
+        <div class="stat-card">
+            <span>Conceptos inactivos</span>
+            <strong id="conceptosInactivos">0</strong>
+        </div>
+    </div>
+
+    <div id="conceptoFormSection" class="panel" hidden>
+        <div class="panel-header">
+            <h3 id="tituloFormularioConcepto">Registrar concepto</h3>
+        </div>
+
+        <form id="conceptoForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="conceptoId">Código</label>
+                    <input type="number" id="conceptoId" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="conceptoDescripcion">Descripción</label>
+                    <input type="text" id="conceptoDescripcion" maxlength="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="conceptoEstado">Estado</label>
+                    <select id="conceptoEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="conceptoMensaje" class="mensaje" role="alert"></div>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarConcepto" class="btn-primary">Guardar</button>
+                <button type="button" id="btnCancelarConcepto" class="btn-secondary">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h3>Listado de conceptos</h3>
+                <p>Consulta y modifica los conceptos registrados.</p>
+            </div>
+            <input type="search" id="buscarConcepto" placeholder="Buscar concepto...">
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaConceptos">
+                    <tr>
+                        <td colspan="4">Cargando conceptos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

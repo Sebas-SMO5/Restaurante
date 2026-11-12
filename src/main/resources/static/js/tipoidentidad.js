@@ -33,15 +33,20 @@ function ocultarMensajeTipoIdentidad(id) {
 }
 
 function actualizarEstadisticasTipoIdentidad() {
-    document.getElementById("totalTiposIdentidad").textContent =
-        tiposIdentidad.length;
+    const total = document.getElementById("totalTiposIdentidad");
+    const activos = document.getElementById("tiposIdentidadActivos");
 
-    document.getElementById("tiposIdentidadActivos").textContent =
-        tiposIdentidad.filter(tipo =>
+    if (total) {
+        total.textContent = tiposIdentidad.length;
+    }
+
+    if (activos) {
+        activos.textContent = tiposIdentidad.filter(tipo =>
             ["activo", "1", "true"].includes(
                 String(tipo.tipo_estado).trim().toLowerCase()
             )
         ).length;
+    }
 }
 
 function mostrarTiposIdentidad(lista) {
@@ -95,7 +100,13 @@ async function cargarTiposIdentidad() {
             throw new Error(detalle || "No se pudieron consultar los tipos de identidad.");
         }
 
-        tiposIdentidad = await respuesta.json();
+        const datos = await respuesta.json();
+
+        if (!Array.isArray(datos)) {
+            throw new Error("La respuesta del servidor no tiene el formato esperado.");
+        }
+
+        tiposIdentidad = datos;
 
         actualizarEstadisticasTipoIdentidad();
         mostrarTiposIdentidad(tiposIdentidad);
@@ -121,6 +132,8 @@ async function cargarTiposIdentidad() {
 function abrirFormularioTipoIdentidad(tipo = null) {
     const formulario = document.getElementById("tipoIdentidadForm");
     const seccion = document.getElementById("tipoIdentidadFormSection");
+
+    if (!formulario || !seccion) return;
 
     formulario.reset();
 
@@ -153,17 +166,20 @@ function abrirFormularioTipoIdentidad(tipo = null) {
 }
 
 function cerrarFormularioTipoIdentidad() {
-    document.getElementById("tipoIdentidadForm").reset();
+    const formulario = document.getElementById("tipoIdentidadForm");
+    const seccion = document.getElementById("tipoIdentidadFormSection");
 
-    document.getElementById("tipoIdentidadFormSection")
-        .classList.add("hidden");
+    if (!formulario || !seccion) return;
+
+    formulario.reset();
+    seccion.classList.add("hidden");
 
     ocultarMensajeTipoIdentidad("tipoIdentidadMensaje");
 }
 
 async function editarTipoIdentidad(id) {
     try {
-        const respuesta = await fetch(`${API_TIPOS_IDENTIDAD}/${id}`);
+        const respuesta = await fetch(`${API_TIPOS_IDENTIDAD}/${encodeURIComponent(id)}`);
 
         if (!respuesta.ok) {
             const detalle = await respuesta.text();
@@ -214,6 +230,7 @@ async function guardarTipoIdentidad(evento) {
     }
 
     const boton = document.getElementById("btnGuardarTipoIdentidad");
+
     boton.disabled = true;
 
     try {
@@ -230,10 +247,10 @@ async function guardarTipoIdentidad(evento) {
             }
         );
 
-        const mensaje = await respuesta.text();
+        const resultado = await respuesta.text();
 
         if (!respuesta.ok) {
-            throw new Error(mensaje || "No se pudo guardar el tipo de identidad.");
+            throw new Error(resultado || "No se pudo guardar el tipo de identidad.");
         }
 
         cerrarFormularioTipoIdentidad();
@@ -242,7 +259,7 @@ async function guardarTipoIdentidad(evento) {
 
         mostrarMensajeTipoIdentidad(
             "mensajeTiposIdentidad",
-            mensaje || "Tipo de identidad guardado correctamente.",
+            resultado || "Tipo de identidad guardado correctamente.",
             "success"
         );
 
@@ -261,16 +278,17 @@ async function guardarTipoIdentidad(evento) {
 }
 
 function buscarTiposIdentidad() {
-    const busqueda = document
-        .getElementById("buscarTipoIdentidad")
-        .value
-        .trim()
-        .toLowerCase();
+    const campoBusqueda = document.getElementById("buscarTipoIdentidad");
+
+    if (!campoBusqueda) return;
+
+    const busqueda = campoBusqueda.value.trim().toLowerCase();
 
     const filtrados = tiposIdentidad.filter(tipo =>
         String(tipo.tipo_descripcion ?? "").toLowerCase().includes(busqueda) ||
         String(tipo.tipo_sigla ?? "").toLowerCase().includes(busqueda) ||
-        String(tipo.tipo_id ?? "").includes(busqueda)
+        String(tipo.tipo_id ?? "").includes(busqueda) ||
+        String(tipo.tipo_estado ?? "").toLowerCase().includes(busqueda)
     );
 
     mostrarTiposIdentidad(filtrados);
@@ -304,43 +322,10 @@ function inicializarTipoIdentidad() {
 
             if (!boton) return;
 
-            editarTipoIdentidad(
-                Number(boton.dataset.editarTipoIdentidad)
-            );
+            editarTipoIdentidad(Number(boton.dataset.editarTipoIdentidad));
         });
 
     cargarTiposIdentidad();
 }
 
 window.inicializarTipoIdentidad = inicializarTipoIdentidad;
-
-document.addEventListener("click", async evento => {
-    const boton = evento.target.closest(
-        '.submenu-item[data-vista="tipo-identidad"]'
-    );
-
-    if (!boton) return;
-
-    const contenedor = document.getElementById("contenedorVistaExterna");
-
-    try {
-        const respuesta = await fetch("/views/tipo-identidad.html");
-
-        if (!respuesta.ok) {
-            throw new Error("No fue posible cargar la vista de tipos de identidad.");
-        }
-
-        contenedor.innerHTML = await respuesta.text();
-
-        inicializarTipoIdentidad();
-
-    } catch (error) {
-        contenedor.innerHTML = `
-            <div class="message error">
-                ${escaparTipoIdentidad(error.message)}
-            </div>
-        `;
-
-        console.error(error);
-    }
-});

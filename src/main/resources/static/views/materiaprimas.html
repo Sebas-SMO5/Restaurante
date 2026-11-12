@@ -1,0 +1,240 @@
+
+<section id="vistaMateriasPrimas" class="materias-primas">
+    <div class="mp-encabezado">
+        <div>
+            <h2>Materias primas</h2>
+            <p>Administra los insumos y consulta sus existencias.</p>
+        </div>
+        <button type="button" id="btnNuevoInsumo">Nuevo insumo</button>
+    </div>
+
+    <div id="formularioInsumo" class="mp-formulario" hidden>
+        <h3 id="tituloFormularioInsumo">Registrar insumo</h3>
+
+        <form id="insumoForm">
+            <div class="mp-grid">
+                <div>
+                    <label for="ins_id">Código del insumo</label>
+                    <input type="number" id="ins_id" min="1" required>
+                </div>
+
+                <div>
+                    <label for="sede_id">Código de sede</label>
+                    <input type="number" id="sede_id" min="1" required>
+                </div>
+
+                <div>
+                    <label for="cins_id">Código de categoría</label>
+                    <input type="number" id="cins_id" min="1" required>
+                </div>
+
+                <div>
+                    <label for="pres_id">Código de presentación</label>
+                    <input type="number" id="pres_id" min="1" required>
+                </div>
+
+                <div>
+                    <label for="ins_nombre">Nombre del insumo</label>
+                    <input type="text" id="ins_nombre" maxlength="255" required>
+                </div>
+
+                <div>
+                    <label for="ins_codigo">Código</label>
+                    <input type="text" id="ins_codigo">
+                </div>
+
+                <div>
+                    <label for="ins_codigo_barras">Código de barras</label>
+                    <input type="text" id="ins_codigo_barras">
+                </div>
+
+                <div>
+                    <label for="ins_precio_compra">Precio de compra</label>
+                    <input type="number" id="ins_precio_compra" min="0" step="0.01">
+                </div>
+
+                <div>
+                    <label for="ins_stock">Existencias</label>
+                    <input type="number" id="ins_stock" min="0" step="0.01" required>
+                </div>
+
+                <div>
+                    <label for="ins_stock_min">Stock mínimo</label>
+                    <input type="number" id="ins_stock_min" min="0" step="0.01" required>
+                </div>
+
+                <div>
+                    <label for="ins_imagen">Imagen (ruta o URL)</label>
+                    <input type="text" id="ins_imagen">
+                </div>
+            </div>
+
+            <div class="mp-opciones">
+                <label>
+                    <input type="checkbox" id="ins_vendible">
+                    Producto vendible
+                </label>
+
+                <label>
+                    <input type="checkbox" id="ins_estado" checked>
+                    Insumo activo
+                </label>
+            </div>
+
+            <div class="mp-acciones">
+                <button type="submit" id="btnGuardarInsumo">Guardar</button>
+                <button type="button" id="btnCancelarInsumo">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="mp-tabla-contenedor">
+        <div class="mp-tabla-encabezado">
+            <h3>Listado de insumos</h3>
+            <input type="search" id="buscarInsumo" placeholder="Buscar insumo...">
+        </div>
+
+        <div class="mp-tabla-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Código interno</th>
+                        <th>Precio compra</th>
+                        <th>Existencias</th>
+                        <th>Stock mínimo</th>
+                        <th>Vendible</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaInsumos">
+                    <tr>
+                        <td colspan="9">Cargando insumos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p id="mensajeInsumo" role="status"></p>
+</section>
+
+<style>
+    .materias-primas {
+        width: 100%;
+    }
+
+    .mp-encabezado,
+    .mp-tabla-encabezado,
+    .mp-acciones {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .mp-encabezado {
+        margin-bottom: 20px;
+    }
+
+    .mp-encabezado h2,
+    .mp-tabla-encabezado h3,
+    .mp-formulario h3 {
+        margin-bottom: 5px;
+    }
+
+    .mp-encabezado p {
+        margin-top: 0;
+    }
+
+    .mp-formulario,
+    .mp-tabla-contenedor {
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+    }
+
+    .mp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 15px;
+        margin-top: 18px;
+    }
+
+    .mp-grid div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .mp-grid input,
+    .mp-tabla-encabezado input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+
+    .mp-opciones {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+        margin: 18px 0;
+    }
+
+    .mp-acciones {
+        justify-content: flex-start;
+    }
+
+    .materias-primas button {
+        padding: 9px 15px;
+        border: 0;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .mp-tabla-scroll {
+        overflow-x: auto;
+        margin-top: 15px;
+    }
+
+    .materias-primas table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 850px;
+    }
+
+    .materias-primas th,
+    .materias-primas td {
+        padding: 11px;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+    }
+
+    .materias-primas th {
+        background: #f8f9fa;
+    }
+
+    .mp-acciones-tabla {
+        display: flex;
+        gap: 7px;
+    }
+
+    #mensajeInsumo {
+        margin-top: 12px;
+    }
+
+    @media (max-width: 600px) {
+        .mp-formulario,
+        .mp-tabla-contenedor {
+            padding: 12px;
+        }
+    }
+</style>
+
