@@ -20,7 +20,7 @@ site:
       key: section-2
       title: Documentación del Sistema Restaurante
       path: documentation
-      description: ""
+      description: Documentación técnica y funcional del sistema de gestión para restaurantes.
       icon: book-blank
       children:
         - type: space
