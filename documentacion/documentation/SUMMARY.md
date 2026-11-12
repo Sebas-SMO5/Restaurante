@@ -1,27 +1,34 @@
 # Table of contents
 
-* [Welcome](README.md)
+* [Sistema de Gestión para Restaurante](README.md)
 
-## Getting Started
+## Proyecto
 
-* [Getting started](getting-started/getting-started.md)
-* [Quickstart](getting-started/quickstart.md)
-* [Your first project](getting-started/your-first-project.md)
+* [Introducción y objetivos](proyecto/introduccion-objetivos.md)
+* [Tecnologías y herramientas](proyecto/tecnologias-herramientas.md)
+* [Alcance y módulos](proyecto/alcance-modulos.md)
 
-## Core concepts
+## Arquitectura
 
-* [Core concepts](core-concepts/core-concepts.md)
-* [Workspaces and projects](core-concepts/workspaces-and-projects.md)
-* [Permissions](core-concepts/permissions.md)
+* [Arquitectura general](arquitectura/arquitectura-general.md)
+* [Componentes y responsabilidades](arquitectura/componentes-responsabilidades.md)
+* [Módulos funcionales](arquitectura/modulos-funcionales.md)
+* [Flujo de datos](arquitectura/flujo-de-datos.md)
 
-## Guides
+## Implementación
 
-* [Guides](guides/guides.md)
-* [Custom domains](guides/custom-domains.md)
-* [Automations](guides/automations.md)
+* [Frontend](implementacion/frontend.md)
+* [Backend con Spring Boot](implementacion/backend-spring-boot.md)
+* [Base de datos MySQL](implementacion/base-de-datos-mysql.md)
+* [Pruebas y validación](implementacion/pruebas-y-validacion.md)
+* [Seguridad y configuración](implementacion/seguridad-y-configuracion.md)
 
-## Reference
+## Referencia técnica
 
-* [Reference](reference/reference.md)
-* [Configuration](reference/configuration.md)
-* [Glossary](reference/glossary.md)
+* [API REST y endpoints](referencia-tecnica/api-rest-endpoints.md)
+* [Estructura del backend](referencia-tecnica/estructura-backend.md)
+* [Glosario técnico](referencia-tecnica/glosario.md)
+
+***
+
+* [Integrantes del equipo](integrantes-del-equipo.md)

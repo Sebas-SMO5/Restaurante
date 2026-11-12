@@ -1,30 +1,43 @@
 ---
-description: >-
-  Everything you need to build, deploy, and manage your projects on the
-  platform.
+description: Documentación técnica y funcional del sistema de gestión para restaurantes.
 icon: hand-wave
 ---
 
-# Welcome
+# Sistema de Gestión para Restaurante
 
-Welcome to the platform. These docs cover everything from your first project to advanced workflows — pick a starting point below or ask the Assistant to jump straight to what you need.
+**Documentación técnica y funcional del proyecto**
 
-<button type="button" class="button primary" data-action="ask" data-icon="gitbook-assistant">Ask a question…</button>
+Bienvenido a la documentación del Sistema de Gestión para Restaurante. Este sitio reúne la descripción del proyecto, sus objetivos, arquitectura, tecnologías, módulos funcionales, implementación del frontend y backend, base de datos, API REST y criterios de pruebas.
 
-<button type="button" class="button secondary" data-action="ask" data-query="How do I deploy my first project" data-icon="rocket-launch">Deploy your first project</button><button type="button" class="button secondary" data-action="ask" data-query="How do I set up a custom domain" data-icon="globe">Set up a custom domain</button><button type="button" class="button secondary" data-action="ask" data-query="How do I invite my team" data-icon="user-group">Invite your team</button>
+El sistema busca apoyar procesos operativos y administrativos de un restaurante mediante una aplicación web conectada a un backend y a una base de datos relacional.
 
-***
+## Contenido
 
-{% hint style="success" icon="sparkles" %}
-**New: scheduled deploys and team-level audit logs.** Schedule deploys for any future date and review every action taken in your workspace.
+* **Descripción del proyecto:** propósito, objetivos y alcance.
+* **Arquitectura del sistema:** capas, componentes y flujo de datos.
+* **Tecnologías:** herramientas utilizadas en el desarrollo.
+* **Módulos funcionales:** platos, pedidos, inventario y administración.
+* **Frontend:** interfaz y comunicación con el backend.
+* **Backend:** Spring Boot, controladores, modelos y DAO.
+* **Base de datos:** MySQL y persistencia.
+* **API REST:** rutas y ejemplos confirmados.
+* **Pruebas:** escenarios y validaciones.
 
-<a href="https://app.gitbook.com/s/BPWPVjiTyMmj5ggnniIZ/" class="button secondary">See what's new</a>
-{% endhint %}
+## Tecnologías principales
 
-## Where to start
+| Componente               | Tecnología                 |
+| ------------------------ | -------------------------- |
+| Backend                  | Java y Spring Boot         |
+| Servicios HTTP           | Spring Web / API REST      |
+| Acceso a datos           | Spring JDBC y JdbcTemplate |
+| Base de datos            | MySQL                      |
+| Interfaz revisada        | JavaScript, HTML y CSS     |
+| Control de versiones     | Git y GitHub               |
+| Documentación            | GitBook                    |
+| Diagrama de arquitectura | GitDiagram                 |
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><h4><i class="fa-rocket-launch" style="color:$primary;">:rocket-launch:</i></h4></td><td><h4>Getting started</h4></td><td>Set up your account and ship your first project in minutes.</td><td><a href="getting-started/getting-started.md">getting-started.md</a></td></tr><tr><td><h4><i class="fa-book" style="color:$primary;">:book:</i></h4></td><td><h4>Core concepts</h4></td><td>Understand workspaces, projects, and how permissions work.</td><td><a href="core-concepts/core-concepts.md">core-concepts.md</a></td></tr><tr><td><h4><i class="fa-graduation-cap" style="color:$primary;">:graduation-cap:</i></h4></td><td><h4>Guides</h4></td><td>Walkthroughs for common tasks like custom domains and automations.</td><td><a href="guides/guides.md">guides.md</a></td></tr><tr><td><h4><i class="fa-book-open" style="color:$primary;">:book-open:</i></h4></td><td><h4>Reference</h4></td><td>Detailed configuration options, limits, and terminology.</td><td><a href="reference/reference.md">reference.md</a></td></tr></tbody></table>
+## Arquitectura general
 
-## Popular tasks
+La solución separa la presentación, los controladores REST, los modelos de datos, los objetos de acceso a datos (DAO) y la persistencia en MySQL.
 
-<table data-view="cards"><thead><tr><th></th><th data-type="content-ref"></th><th data-type="content-ref"></th><th data-type="content-ref"></th></tr></thead><tbody><tr><td><h4>For builders</h4></td><td><a href="getting-started/quickstart.md">quickstart.md</a></td><td><a href="getting-started/your-first-project.md">your-first-project.md</a></td><td><a href="guides/custom-domains.md">custom-domains.md</a></td></tr><tr><td><h4>For admins</h4></td><td><a href="core-concepts/permissions.md">permissions.md</a></td><td><a href="reference/configuration.md">configuration.md</a></td><td><a href="core-concepts/workspaces-and-projects.md">workspaces-and-projects.md</a></td></tr><tr><td><h4>For developers</h4></td><td><a href="guides/automations.md">automations.md</a></td><td><a href="reference/glossary.md">glossary.md</a></td><td><a href="reference/configuration.md">configuration.md</a></td></tr></tbody></table>
+> La documentación distingue entre funcionalidades comprobadas en código o pruebas y módulos identificados únicamente en el diagrama. Los detalles no verificados se señalan como pendientes, sin inventar rutas ni reglas de negocio.
