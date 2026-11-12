@@ -1,6 +1,8 @@
 
 package com.restaurante.backend_restaurante.Model;
 
+
+
 public class Comanda {
 
     private int com_id;

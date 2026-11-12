@@ -1,6 +1,8 @@
 
 package com.restaurante.backend_restaurante.Model;
 
+
+
 public class Categoria {
 
     private int idCategoria;

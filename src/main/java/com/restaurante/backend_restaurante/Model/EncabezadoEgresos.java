@@ -2,6 +2,7 @@ package com.restaurante.backend_restaurante.Model;
 
 import java.sql.Timestamp;
 
+
 public class EncabezadoEgresos {
 
     private int id;
