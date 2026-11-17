@@ -1,0 +1,149 @@
+<section id="vistaTipoIdentidad" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Tipos de identidad registrados</span>
+            <strong id="totalTiposIdentidad">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Tipos activos</span>
+            <strong id="tiposIdentidadActivos">0</strong>
+            <span class="stat-description">Disponibles para los clientes</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Tipos inactivos</span>
+            <strong id="tiposIdentidadInactivos">0</strong>
+            <span class="stat-description">Deshabilitados temporalmente</span>
+        </article>
+    </section>
+
+    <section id="tipoIdentidadFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tipoIdentidadFormTitle">Registrar tipo de identidad</h3>
+                <p>El código se asigna automáticamente al guardar.</p>
+            </div>
+
+            <button
+                id="btnCerrarTipoIdentidad"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="tipoIdentidadForm">
+            <input type="hidden" id="tipoIdentidadId">
+
+            <div class="form-grid form-grid-3-auto">
+                <label>
+                    Descripción
+                    <input
+                        id="tipoIdentidadDescripcion"
+                        type="text"
+                        maxlength="40"
+                        placeholder="Ej. Cédula de ciudadanía"
+                        required>
+                </label>
+
+                <label>
+                    Sigla
+                    <input
+                        id="tipoIdentidadSigla"
+                        type="text"
+                        maxlength="3"
+                        placeholder="Ej. CC"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="tipoIdentidadEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <p class="form-note">
+                La sigla admite máximo 3 caracteres y se guarda en mayúsculas.
+            </p>
+
+            <div id="tipoIdentidadMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarTipoIdentidad"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    id="btnGuardarTipoIdentidad"
+                    class="button button-primary"
+                    type="submit">
+                    Guardar tipo
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de tipos de identidad</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarTiposIdentidad"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevoTipoIdentidad"
+                    class="button button-primary"
+                    type="button">
+                    + Nuevo tipo
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarTipoIdentidad"
+                type="search"
+                placeholder="Buscar por código, descripción o sigla...">
+        </div>
+
+        <div id="mensajeTiposIdentidad" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Sigla</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaTiposIdentidad">
+                    <tr>
+                        <td colspan="5">Cargando tipos de identidad...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

@@ -1,34 +1,17 @@
 package com.restaurante.backend_restaurante.Model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Plato {
 
-    int idPlato;
-    int idEstado;
-    String descripcion;
-    float precio;
+    private int idPlato;
+    private int idEstado;
+    private Integer idCategoria;
+    private String descripcion;
+    private float precio;
+
+    // Solo lectura: se obtiene con un JOIN para mostrar el nombre de la categoría.
+    private String nombreCategoria;
 
     public Plato() {
-    }
-
-    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public Plato(
-            @JsonProperty("descripcion") String descripcion,
-            @JsonProperty("precio") float precio,
-            @JsonProperty("idEstado") int idEstado) {
-
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.idEstado = idEstado;
-    }
-
-    public Plato(int idPlato, int idEstado, String descripcion, float precio) {
-        this.idPlato = idPlato;
-        this.idEstado = idEstado;
-        this.descripcion = descripcion;
-        this.precio = precio;
     }
 
     public int getIdPlato() {
@@ -47,6 +30,14 @@ public class Plato {
         this.idEstado = idEstado;
     }
 
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -61,5 +52,33 @@ public class Plato {
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
+
+    // Solo lectura: nombre del estado y si ese estado es realmente de tipo "Plato".
+    private String nombreEstado;
+    private boolean estadoValido;
+
+    public String getNombreEstado() {
+        return nombreEstado;
+    }
+
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
+    }
+
+    public boolean isEstadoValido() {
+        return estadoValido;
+    }
+
+    public void setEstadoValido(boolean estadoValido) {
+        this.estadoValido = estadoValido;
     }
 }

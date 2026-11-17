@@ -1,0 +1,159 @@
+<section id="vistaClientes">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Clientes registrados</span>
+            <strong id="totalClientes">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Clientes activos</span>
+            <strong id="clientesActivos">0</strong>
+            <span class="stat-description">Disponibles para facturar</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Sin documento</span>
+            <strong id="clientesSinDocumento">0</strong>
+            <span class="stat-description">Registros antiguos por completar</span>
+        </article>
+    </section>
+
+    <section id="clienteFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="clienteFormTitle">Registrar cliente</h3>
+                <p>Completa la identificación y los datos de contacto del cliente.</p>
+            </div>
+
+            <button id="btnCerrarCliente" class="button button-light" type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="clienteForm" novalidate>
+            <input type="hidden" id="clienteId">
+
+            <h4 class="form-section-title">Identificación</h4>
+
+            <div class="form-grid">
+                <label>
+                    Tipo de documento
+                    <select id="cliTipo" required>
+                        <option value="">Seleccione un tipo</option>
+                    </select>
+                </label>
+
+                <label>
+                    Número de documento
+                    <input id="cliDocumento" type="text" maxlength="20"
+                        placeholder="Ej. 1020304050" required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="cliEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+
+                <label>
+                    Nombre
+                    <input id="cliNombre" type="text" maxlength="60"
+                        placeholder="Ej. Laura" required>
+                </label>
+
+                <label class="form-span-2">
+                    Apellidos
+                    <input id="cliApellidos" type="text" maxlength="60"
+                        placeholder="Ej. Gómez Restrepo" required>
+                </label>
+            </div>
+
+            <h4 class="form-section-title">Contacto</h4>
+
+            <div class="form-grid">
+                <label>
+                    Correo electrónico
+                    <input id="cliCorreo" type="email" maxlength="40"
+                        placeholder="Ej. laura@correo.com" required>
+                </label>
+
+                <label>
+                    Teléfono
+                    <input id="cliTelefono" type="tel" maxlength="40"
+                        placeholder="Ej. 3001234567">
+                </label>
+
+                <label>
+                    Dirección
+                    <input id="cliDireccion" type="text" maxlength="40"
+                        placeholder="Ej. Calle 10 # 20-30">
+                </label>
+            </div>
+
+            <div id="clienteMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarCliente" class="button button-light" type="button">
+                    Cancelar
+                </button>
+
+                <button id="btnGuardarCliente" class="button button-primary" type="submit">
+                    Guardar cliente
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de clientes</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button id="btnActualizarClientes" class="button button-light" type="button">
+                    Actualizar listado
+                </button>
+
+                <button id="btnNuevoCliente" class="button button-primary" type="button">
+                    + Nuevo cliente
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input id="buscarCliente" type="search"
+                placeholder="Buscar por documento, nombre, correo o teléfono...">
+        </div>
+
+        <div id="mensajeClientes" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaClientes">
+                    <tr>
+                        <td colspan="7">Cargando clientes...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

@@ -10,6 +10,7 @@ public class ReciboCaja {
     private Date rc_fecha;
     private int ped_id;
     private int cli_id;
+    private int fp_id;
     private double rc_total;
     private String rc_observacion;
     private String rc_estado;
@@ -92,5 +93,13 @@ public class ReciboCaja {
 
     public void setRc_estado(String rc_estado) {
         this.rc_estado = rc_estado;
+    }
+
+    public int getFp_id() {
+        return fp_id;
+    }
+
+    public void setFp_id(int fp_id) {
+        this.fp_id = fp_id;
     }
 }

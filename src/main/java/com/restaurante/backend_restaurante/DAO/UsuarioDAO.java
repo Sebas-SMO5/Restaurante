@@ -63,6 +63,63 @@ public class UsuarioDAO {
         return resultados.isEmpty() ? null : resultados.get(0);
     }
 
+    /**
+     * Busca un usuario por su login incluyendo la contraseña cifrada.
+     * Solo se usa internamente para validar el inicio de sesión;
+     * nunca se debe devolver este objeto directamente al frontend.
+     */
+    public Usuario getCredencialesPorLogin(String login) {
+
+        String sql = """
+            SELECT usu_id, usu_nombre, usu_apellido, usu_direccion,
+                   usu_telefono, usu_correo, perf_id, usu_login, usu_estado,
+                   usu_pass
+            FROM usuario
+            WHERE usu_login = ?
+            """;
+
+        List<Usuario> resultados = jdbcTemplate.query(
+            sql,
+            (rs, rowNum) -> {
+                Usuario usuario = mapUsuario(rs, rowNum);
+                usuario.setUsu_pass(rs.getString("usu_pass"));
+                return usuario;
+            },
+            login
+        );
+
+        return resultados.isEmpty() ? null : resultados.get(0);
+    }
+
+    /**
+     * Indica si el login ya está en uso por otro usuario.
+     * idExcluir permite ignorar al propio usuario al editarlo (usar 0 al registrar).
+     */
+    public boolean existeLogin(String login, int idExcluir) {
+
+        String sql = """
+            SELECT COUNT(*)
+            FROM usuario
+            WHERE LOWER(usu_login) = LOWER(?)
+              AND usu_id <> ?
+            """;
+
+        Integer total = jdbcTemplate.queryForObject(sql, Integer.class, login, idExcluir);
+
+        return total != null && total > 0;
+    }
+
+    public boolean actualizarPass(int id, String passCifrada) {
+
+        String sql = """
+            UPDATE usuario
+            SET usu_pass = ?
+            WHERE usu_id = ?
+            """;
+
+        return jdbcTemplate.update(sql, passCifrada, id) > 0;
+    }
+
     public boolean add(Usuario usuario) {
         String sql = """
             INSERT INTO usuario (
@@ -87,7 +144,42 @@ public class UsuarioDAO {
         ) > 0;
     }
 
+    /**
+     * Actualiza un usuario. Si usu_pass llega vacío o nulo,
+     * se conserva la contraseña actual.
+     */
     public boolean update(Usuario usuario) {
+        boolean cambiarPass = usuario.getUsu_pass() != null
+                && !usuario.getUsu_pass().trim().isEmpty();
+
+        if (!cambiarPass) {
+            String sql = """
+                UPDATE usuario
+                SET usu_nombre = ?,
+                    usu_apellido = ?,
+                    usu_direccion = ?,
+                    usu_telefono = ?,
+                    usu_correo = ?,
+                    perf_id = ?,
+                    usu_login = ?,
+                    usu_estado = ?
+                WHERE usu_id = ?
+                """;
+
+            return jdbcTemplate.update(
+                sql,
+                usuario.getUsu_nombre(),
+                usuario.getUsu_apellido(),
+                usuario.getUsu_direccion(),
+                usuario.getUsu_telefono(),
+                usuario.getUsu_correo(),
+                usuario.getPerf_id(),
+                usuario.getUsu_login(),
+                usuario.getUsu_estado(),
+                usuario.getUsu_id()
+            ) > 0;
+        }
+
         String sql = """
             UPDATE usuario
             SET usu_nombre = ?,

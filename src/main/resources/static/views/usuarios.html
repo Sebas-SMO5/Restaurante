@@ -1,0 +1,192 @@
+<section id="vistaUsuarios">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Usuarios registrados</span>
+            <strong id="totalUsuarios">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Usuarios activos</span>
+            <strong id="usuariosActivos">0</strong>
+            <span class="stat-description">Pueden iniciar sesión</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Usuarios inactivos</span>
+            <strong id="usuariosInactivos">0</strong>
+            <span class="stat-description">Sin acceso al sistema</span>
+        </article>
+    </section>
+
+    <section id="usuarioFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioUsuario">Registrar usuario</h3>
+                <p>Completa los datos personales y de acceso del usuario.</p>
+            </div>
+
+            <button
+                id="btnCerrarUsuario"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="usuarioForm" autocomplete="off" novalidate>
+            <h4 class="form-section-title">Datos personales</h4>
+
+            <div class="form-grid">
+                <label>
+                    Nombre
+                    <input id="usuarioNombre" type="text" maxlength="60"
+                        placeholder="Ej. Laura" required>
+                </label>
+
+                <label>
+                    Apellido
+                    <input id="usuarioApellido" type="text" maxlength="60"
+                        placeholder="Ej. Gómez" required>
+                </label>
+
+                <label>
+                    Teléfono
+                    <input id="usuarioTelefono" type="tel" maxlength="20"
+                        placeholder="Ej. 3001234567" required>
+                </label>
+
+                <label>
+                    Correo
+                    <input id="usuarioCorreo" type="email" maxlength="70"
+                        placeholder="Ej. laura@correo.com" required>
+                </label>
+
+                <label class="form-span-2">
+                    Dirección
+                    <input id="usuarioDireccion" type="text" maxlength="100"
+                        placeholder="Ej. Calle 10 # 20-30" required>
+                </label>
+            </div>
+
+            <h4 class="form-section-title">Acceso al sistema</h4>
+
+            <div class="form-grid">
+                <label>
+                    Usuario (login)
+                    <input id="usuarioLogin" type="text" maxlength="30"
+                        autocomplete="off" autocapitalize="none" spellcheck="false"
+                        placeholder="Ej. lgomez" required>
+                </label>
+
+                <label>
+                    Rol
+                    <select id="usuarioPerfil" required>
+                        <option value="">Seleccione un rol</option>
+                    </select>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="usuarioEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span id="usuarioPassEtiqueta">Contraseña</span>
+                    <input id="usuarioPass" type="password" maxlength="72"
+                        autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+                </label>
+
+                <label>
+                    Confirmar contraseña
+                    <input id="usuarioPassConfirmar" type="password" maxlength="72"
+                        autocomplete="new-password" placeholder="Repite la contraseña">
+                </label>
+            </div>
+
+            <p class="form-note" id="usuarioPassAyuda">
+                El login debe tener entre 3 y 30 caracteres, sin espacios. La contraseña se guarda cifrada.
+            </p>
+
+            <div id="usuarioMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarUsuario"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    id="btnGuardarUsuario"
+                    class="button button-primary"
+                    type="submit">
+                    Guardar usuario
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de usuarios</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarUsuarios"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevoUsuario"
+                    class="button button-primary"
+                    type="button">
+                    + Nuevo usuario
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarUsuario"
+                type="search"
+                placeholder="Buscar por nombre, login, correo o rol...">
+        </div>
+
+        <div id="usuariosListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Login</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaUsuarios">
+                    <tr>
+                        <td colspan="8">Cargando usuarios...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

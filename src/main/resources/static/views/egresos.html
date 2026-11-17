@@ -1,0 +1,125 @@
+<section id="vistaEgresos" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Egresos de hoy</span>
+            <strong id="egresosHoy">$ 0</strong>
+            <span class="stat-description" id="egresosHoyCantidad">0 comprobantes</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Egresos del mes</span>
+            <strong id="egresosMes">$ 0</strong>
+            <span class="stat-description">Sin contar anulados</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Comprobantes registrados</span>
+            <strong id="egresosTotal">0</strong>
+            <span class="stat-description" id="egresosAnulados">0 anulados</span>
+        </article>
+    </section>
+
+    <section id="egresoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3>Registrar comprobante de egreso</h3>
+                <p>El número del comprobante, la fecha y el usuario se asignan automáticamente.</p>
+            </div>
+
+            <button id="btnCerrarEgreso" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <form id="egresoForm" novalidate>
+            <div class="form-grid">
+                <label>
+                    Concepto
+                    <select id="egresoConcepto" required></select>
+                </label>
+
+                <label>
+                    Forma de pago
+                    <select id="egresoFormaPago" required></select>
+                </label>
+
+                <label>
+                    Valor
+                    <input id="egresoValor" type="number" min="1" step="1" placeholder="Ej. 150000" required>
+                </label>
+
+                <label>
+                    Identificación del tercero
+                    <input id="egresoTercero" type="text" maxlength="15" placeholder="NIT o cédula de quien recibe" required>
+                </label>
+
+                <label>
+                    Documento soporte
+                    <input id="egresoDocumento" type="text" maxlength="15" placeholder="Ej. factura FE-1234 (opcional)">
+                </label>
+
+                <label class="form-span-3">
+                    Detalle
+                    <input id="egresoDetalle" type="text" maxlength="250" placeholder="Ej. Pago de servicio de energía de noviembre" required>
+                </label>
+            </div>
+
+            <div id="egresoMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarEgreso" class="button button-light" type="button">Cancelar</button>
+                <button id="btnGuardarEgreso" class="button button-primary" type="submit">Registrar egreso</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Comprobantes de egreso</h3>
+                <p>Salidas de dinero del restaurante.</p>
+            </div>
+
+            <div class="actions">
+                <button id="btnActualizarEgresos" class="button button-light" type="button">Actualizar listado</button>
+                <button id="btnNuevoEgreso" class="button button-primary" type="button">+ Nuevo egreso</button>
+            </div>
+        </div>
+
+        <div class="filters-row">
+            <div class="segmented" id="filtroEgresos">
+                <button type="button" data-filtro="mes" class="active">Este mes</button>
+                <button type="button" data-filtro="hoy">Hoy</button>
+                <button type="button" data-filtro="anulados">Anulados</button>
+                <button type="button" data-filtro="todos">Todos</button>
+            </div>
+
+            <div class="search-box">
+                <input id="buscarEgreso" type="search" placeholder="Buscar por número, tercero, concepto o detalle...">
+            </div>
+        </div>
+
+        <div id="egresosListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N.°</th>
+                        <th>Fecha</th>
+                        <th>Concepto</th>
+                        <th>Tercero</th>
+                        <th>Detalle</th>
+                        <th>Forma de pago</th>
+                        <th>Valor</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaEgresos">
+                    <tr><td colspan="9">Cargando comprobantes...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

@@ -1,0 +1,148 @@
+<section id="vistaFormasPago" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Formas de pago registradas</span>
+            <strong id="totalFormasPago">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Formas de pago activas</span>
+            <strong id="formasPagoActivas">0</strong>
+            <span class="stat-description">Disponibles para los egresos</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Formas de pago inactivas</span>
+            <strong id="formasPagoInactivas">0</strong>
+            <span class="stat-description">Deshabilitadas temporalmente</span>
+        </article>
+    </section>
+
+    <section id="formaPagoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioFormaPago">Registrar forma de pago</h3>
+                <p>Completa la información de la forma de pago.</p>
+            </div>
+
+            <button
+                id="btnCerrarFormaPago"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="formaPagoForm">
+            <div class="form-grid form-grid-3">
+                <label>
+                    Código
+                    <input
+                        id="formaPagoId"
+                        type="number"
+                        min="1"
+                        max="99"
+                        step="1"
+                        placeholder="Ej. 3"
+                        required>
+                </label>
+
+                <label>
+                    Descripción
+                    <input
+                        id="formaPagoDescripcion"
+                        type="text"
+                        maxlength="50"
+                        placeholder="Ej. Tarjeta débito"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="formaPagoEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <p class="form-note">
+                El código no se puede cambiar después de registrar la forma de pago.
+            </p>
+
+            <div id="formaPagoMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarFormaPago"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    id="btnGuardarFormaPago"
+                    class="button button-primary"
+                    type="submit">
+                    Guardar forma de pago
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de formas de pago</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarFormasPago"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevaFormaPago"
+                    class="button button-primary"
+                    type="button">
+                    + Nueva forma de pago
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarFormaPago"
+                type="search"
+                placeholder="Buscar por código o descripción...">
+        </div>
+
+        <div id="formasPagoListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaFormasPago">
+                    <tr>
+                        <td colspan="4">Cargando formas de pago...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

@@ -49,4 +49,15 @@ public class Estado {
     public void setEst_estado(String est_estado) {
         this.est_estado = est_estado;
     }
+
+    // Solo lectura: nombre del tipo de estado (Pedido, Plato, PQRS...), obtenido con JOIN.
+    private String tes_descripcion;
+
+    public String getTes_descripcion() {
+        return tes_descripcion;
+    }
+
+    public void setTes_descripcion(String tes_descripcion) {
+        this.tes_descripcion = tes_descripcion;
+    }
 }

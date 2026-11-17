@@ -1,14 +1,42 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="verificando-sesion">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurante | Sistema de Gestión</title>
+    <style>
+        /* Oculta el sistema mientras se confirma que hay una sesión iniciada. */
+        html.verificando-sesion body { visibility: hidden; }
+    </style>
     <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- Debe ir primero: protege las vistas y detecta sesiones vencidas. -->
+    <script src="/js/sesion.js"></script>
+
+    <script src="/js/clientes.js" defer></script>
+    <script src="/js/categorias.js" defer></script>
     <script src="/js/platos.js" defer></script>
+    <script src="/js/tipoidentidad.js" defer></script>
+    <script src="/js/insumos.js" defer></script>
+    <script src="/js/concepto.js" defer></script>
+    <script src="/js/formapago.js" defer></script>
+    <script src="/js/unidadesmedida.js" defer></script>
+    <script src="/js/categoriasinsumo.js" defer></script>
+    <script src="/js/estados.js" defer></script>
+    <script src="/js/pedidos.js" defer></script>
+    <script src="/js/cocina.js" defer></script>
+    <script src="/js/recibos.js" defer></script>
+    <script src="/js/egresos.js" defer></script>
+    <script src="/js/pqrs.js" defer></script>
+    <script src="/js/inicio.js" defer></script>
+    <script src="/js/cierre.js" defer></script>
+    <script src="/js/roles.js" defer></script>
+    <script src="/js/tipopqrs.js" defer></script>
+    <script src="/js/usuarios.js" defer></script>
 </head>
 <body>
+
     <header class="topbar">
         <div class="brand">
             <span class="brand-icon">R</span>
@@ -18,37 +46,117 @@
             </div>
         </div>
 
-        <span class="connection">
-            <span class="connection-dot"></span>
-            Sistema de Gestión para Restaurante
-        </span>
+        <div class="session-box">
+            <span class="session-avatar" id="sesionIniciales" aria-hidden="true"></span>
+
+            <div class="session-info">
+                <strong id="sesionNombre">Usuario</strong>
+                <span id="sesionRol"></span>
+            </div>
+
+            <button
+                id="btnMiContrasena"
+                class="button button-light session-logout"
+                type="button">
+                Mi contraseña
+            </button>
+
+            <button
+                id="btnCerrarSesion"
+                class="button button-light session-logout"
+                type="button">
+                Cerrar sesión
+            </button>
+        </div>
     </header>
 
+    <!-- Cambiar mi contraseña (la lógica está en js/sesion.js) -->
+    <dialog id="dialogoContrasena" class="dialogo">
+        <form id="formContrasena" novalidate>
+            <h3>Cambiar mi contraseña</h3>
+            <p>Por seguridad, primero confirma tu contraseña actual.</p>
+
+            <label>
+                Contraseña actual
+                <input id="passActual" type="password" autocomplete="current-password" maxlength="72" required>
+            </label>
+
+            <label>
+                Nueva contraseña
+                <input id="passNueva" type="password" autocomplete="new-password" maxlength="72"
+                    placeholder="Mínimo 6 caracteres" required>
+            </label>
+
+            <label>
+                Confirmar nueva contraseña
+                <input id="passConfirmar" type="password" autocomplete="new-password" maxlength="72" required>
+            </label>
+
+            <div id="passMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarContrasena" class="button button-light" type="button">Cancelar</button>
+                <button id="btnGuardarContrasena" class="button button-primary" type="submit">Cambiar contraseña</button>
+            </div>
+        </form>
+    </dialog>
+
     <div class="layout">
+
         <aside class="sidebar">
             <p class="menu-title">MENÚ PRINCIPAL</p>
 
-            <details class="menu-group">
+            <button class="submenu-item menu-inicio active" data-vista="inicio" type="button">
+                Inicio
+            </button>
+
+            <details class="menu-group" open>
                 <summary>Recibo de caja</summary>
+
+                <button class="submenu-item" data-vista="recibos" type="button">
+                    Recibos de caja
+                </button>
+
+                <button class="submenu-item" data-vista="cierre" type="button">
+                    Cierre de caja
+                </button>
+
                 <button class="submenu-item" data-vista="cliente" type="button">
                     Cliente
                 </button>
+
                 <button class="submenu-item" data-vista="tipo-identidad" type="button">
                     Tipo de identidad
                 </button>
             </details>
 
-            <details class="menu-group" open>
+            <details class="menu-group">
                 <summary>Pedido</summary>
-                <button class="submenu-item active" data-vista="platos" type="button">
+
+                <button class="submenu-item" data-vista="pedidos" type="button">
+                    Pedidos
+                </button>
+
+                <button class="submenu-item" data-vista="cocina" type="button">
+                    Cocina / Comandas
+                </button>
+
+                <button class="submenu-item" data-vista="platos" type="button">
                     Platos
                 </button>
+
                 <button class="submenu-item" data-vista="categorias" type="button">
                     Categorías
                 </button>
+
                 <button class="submenu-item" data-vista="materias-primas" type="button">
                     Materias primas
                 </button>
+
+                <button class="submenu-item" data-vista="categorias-insumo" type="button">
+                    Categorías de insumo
+                </button>
+
                 <button class="submenu-item" data-vista="unidades-medida" type="button">
                     Unidades de medida
                 </button>
@@ -56,27 +164,45 @@
 
             <details class="menu-group">
                 <summary>Comprobante de egreso</summary>
+
+                <button class="submenu-item" data-vista="egresos" type="button">
+                    Comprobantes de egreso
+                </button>
+
                 <button class="submenu-item" data-vista="concepto-pago" type="button">
                     Concepto de pago
                 </button>
+
                 <button class="submenu-item" data-vista="forma-pago" type="button">
                     Forma de pago
-                </button>
-                <button class="submenu-item" data-vista="inicio-sesion" type="button">
-                    Inicio de sesión
                 </button>
             </details>
 
             <details class="menu-group">
                 <summary>PQRS</summary>
-                <button class="submenu-item" data-vista="usuario" type="button">
+
+                <button class="submenu-item" data-vista="pqrs" type="button">
+                    Bandeja de PQRS
+                </button>
+
+                <button class="submenu-item" data-vista="usuario" type="button" data-solo-admin>
                     Usuario
                 </button>
-                <button class="submenu-item" data-vista="rol" type="button">
+
+                <button class="submenu-item" data-vista="rol" type="button" data-solo-admin>
                     Rol
                 </button>
+
                 <button class="submenu-item" data-vista="tipo-pqrs" type="button">
                     Tipo de PQRS
+                </button>
+            </details>
+
+            <details class="menu-group">
+                <summary>Configuración</summary>
+
+                <button class="submenu-item" data-vista="estados" type="button">
+                    Estados
                 </button>
             </details>
 
@@ -86,22 +212,32 @@
         </aside>
 
         <main class="main-content">
+
             <section class="page-heading">
                 <div>
-                    <p class="eyebrow" id="moduloEtiqueta">MÓDULO PEDIDO</p>
-                    <h2 id="tituloVista">Gestión de platos</h2>
+                    <p class="eyebrow" id="moduloEtiqueta">
+                        MÓDULO RECIBO DE CAJA
+                    </p>
+
+                    <h2 id="tituloVista">Gestión de clientes</h2>
+
                     <p class="subtitle" id="descripcionVista">
-                        Consulta y administra los platos del restaurante.
+                        Administra la información de los clientes.
                     </p>
                 </div>
 
-                <button id="btnNuevo" class="button button-primary" type="button">
+                <button
+                    id="btnNuevo"
+                    data-solo-admin
+                    class="button button-primary hidden"
+                    type="button">
                     + Nuevo plato
                 </button>
             </section>
 
-            <section id="contenidoPlatos">
-                <section class="stats">
+            <section id="contenidoPlatos" class="hidden" data-escritura="admin">
+
+                <section class="stats stats-3">
                     <article class="stat-card">
                         <span class="stat-label">Platos registrados</span>
                         <strong id="totalPlatos">0</strong>
@@ -109,9 +245,15 @@
                     </article>
 
                     <article class="stat-card">
-                        <span class="stat-label">Platos activos</span>
+                        <span class="stat-label">Platos disponibles</span>
                         <strong id="platosActivos">0</strong>
-                        <span class="stat-description">Según el estado registrado</span>
+                        <span class="stat-description">Con estado "Disponible"</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <span class="stat-label">Por corregir</span>
+                        <strong id="platosPorCorregir">0</strong>
+                        <span class="stat-description">Sin categoría o con estado no válido</span>
                     </article>
                 </section>
 
@@ -122,7 +264,10 @@
                             <p>Completa la información del plato.</p>
                         </div>
 
-                        <button id="btnCerrar" class="button button-light" type="button">
+                        <button
+                            id="btnCerrar"
+                            class="button button-light"
+                            type="button">
                             Cerrar
                         </button>
                     </div>
@@ -133,33 +278,55 @@
                         <div class="form-grid">
                             <label>
                                 Descripción del plato
-                                <input id="descripcion" type="text" maxlength="150"
-                                    placeholder="Ej. Arroz mixto" required>
+                                <input
+                                    id="descripcion"
+                                    type="text"
+                                    maxlength="40"
+                                    placeholder="Ej. Arroz mixto"
+                                    required>
+                            </label>
+
+                            <label>
+                                Categoría
+                                <select id="idCategoriaPlato" required>
+                                    <option value="">Seleccione una categoría</option>
+                                </select>
                             </label>
 
                             <label>
                                 Precio
-                                <input id="precio" type="number" min="0.01"
-                                    step="0.01" placeholder="Ej. 18000" required>
+                                <input
+                                    id="precio"
+                                    type="number"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="Ej. 18000"
+                                    required>
                             </label>
 
                             <label>
-                                ID del estado
-                                <input id="idEstado" type="number" min="1"
-                                    step="1" placeholder="Ej. 1" required>
+                                Estado
+                                <select id="idEstado" required>
+                                    <option value="">Seleccione un estado</option>
+                                </select>
                             </label>
                         </div>
 
                         <p class="form-note">
-                            Ingresa un ID de estado válido según los registros de tu base de datos.
+                            Solo aparecen los estados activos de tipo "Plato". Se administran en Configuración &gt; Estados.
                         </p>
 
                         <div class="form-actions">
-                            <button id="btnCancelar" class="button button-light" type="button">
+                            <button
+                                id="btnCancelar"
+                                class="button button-light"
+                                type="button">
                                 Cancelar
                             </button>
 
-                            <button class="button button-primary" type="submit">
+                            <button
+                                class="button button-primary"
+                                type="submit">
                                 Guardar plato
                             </button>
                         </div>
@@ -173,13 +340,18 @@
                             <p>Información consultada desde la base de datos.</p>
                         </div>
 
-                        <button id="btnActualizar" class="button button-light" type="button">
+                        <button
+                            id="btnActualizar"
+                            class="button button-light"
+                            type="button">
                             Actualizar listado
                         </button>
                     </div>
 
                     <div class="search-box">
-                        <input id="buscar" type="search"
+                        <input
+                            id="buscar"
+                            type="search"
                             placeholder="Buscar por descripción o ID...">
                     </div>
 
@@ -191,42 +363,32 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Descripción</th>
+                                    <th>Categoría</th>
                                     <th>Precio</th>
-                                    <th>Estado ID</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
 
                             <tbody id="tablaPlatos">
                                 <tr>
-                                    <td colspan="5">Cargando platos...</td>
+                                    <td colspan="6">Cargando platos...</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
+
             </section>
 
-            <section id="vistaPendiente" class="panel hidden">
-                <div class="panel-heading">
-                    <div>
-                        <h3 id="pendienteTitulo">Módulo en preparación</h3>
-                        <p id="pendienteDescripcion">
-                            Esta vista se conectará con su tabla correspondiente.
-                        </p>
-                    </div>
-                </div>
-
-                <p>
-                    La vista está preparada para su desarrollo. Los formularios y
-                    registros se conectarán a la base de datos en los siguientes pasos.
-                </p>
-            </section>
+            <div id="contenedorVistaExterna"></div>
 
             <footer class="page-footer">
                 Sistema de Gestión para Restaurante
             </footer>
+
         </main>
     </div>
+
 </body>
 </html>

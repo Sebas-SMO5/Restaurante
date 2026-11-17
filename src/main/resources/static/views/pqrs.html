@@ -1,0 +1,165 @@
+<section id="vistaPqrs">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Pendientes</span>
+            <strong id="pqrsPendientes">0</strong>
+            <span class="stat-description" id="pqrsVencidas">0 con más de 15 días hábiles</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Atendidas</span>
+            <strong id="pqrsAtendidas">0</strong>
+            <span class="stat-description" id="pqrsTiempo">Tiempo promedio de respuesta: —</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Radicadas por clientes</span>
+            <strong id="pqrsWeb">0</strong>
+            <span class="stat-description">Desde la página pública</span>
+        </article>
+    </section>
+
+    <!-- ===== Registrar PQRS ===== -->
+    <section id="pqrsFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3>Registrar PQRS</h3>
+                <p>Para PQRS que el cliente presenta en persona o por teléfono.</p>
+            </div>
+
+            <button id="btnCerrarPqrs" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <form id="pqrsForm" novalidate>
+            <div class="form-grid">
+                <label>
+                    Tipo
+                    <select id="pqrsTipo" required></select>
+                </label>
+
+                <label>
+                    Nombre de quien la presenta
+                    <input id="pqrsNombre" type="text" maxlength="80" placeholder="Ej. Laura Gómez" required>
+                </label>
+
+                <label>
+                    Correo
+                    <input id="pqrsCorreo" type="email" maxlength="60" placeholder="Ej. laura@correo.com" required>
+                </label>
+
+                <label>
+                    Teléfono
+                    <input id="pqrsTelefono" type="tel" maxlength="20" placeholder="Ej. 3001234567" required>
+                </label>
+
+                <label class="form-span-3">
+                    Descripción
+                    <textarea id="pqrsDescripcion" rows="4" maxlength="2000"
+                        placeholder="Describe qué pasó, cuándo y qué solicita el cliente." required></textarea>
+                </label>
+            </div>
+
+            <div id="pqrsMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarPqrs" class="button button-light" type="button">Cancelar</button>
+                <button id="btnGuardarPqrs" class="button button-primary" type="submit">Radicar PQRS</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ===== Detalle y respuesta ===== -->
+    <section id="pqrsDetalleSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="pqrsDetalleTitulo">PQRS</h3>
+                <p id="pqrsDetalleSubtitulo"></p>
+            </div>
+
+            <button id="btnCerrarDetallePqrs" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <div class="pqrs-detalle">
+            <dl class="pqrs-datos" id="pqrsDatos"></dl>
+
+            <div>
+                <h4 class="form-section-title">Descripción</h4>
+                <p class="pqrs-texto" id="pqrsDetalleDescripcion"></p>
+
+                <h4 class="form-section-title">Respuesta</h4>
+
+                <div id="pqrsRespuestaExistente" class="hidden">
+                    <p class="pqrs-texto pqrs-respuesta" id="pqrsRespuestaTexto"></p>
+                    <p class="form-note" id="pqrsRespuestaInfo"></p>
+                </div>
+
+                <form id="pqrsRespuestaForm" novalidate>
+                    <textarea id="pqrsRespuesta" rows="5" maxlength="2000"
+                        placeholder="Escribe la respuesta para el cliente. Podrá verla en la página pública con su número y correo."></textarea>
+
+                    <div id="pqrsRespuestaMensaje" class="message hidden" role="alert"></div>
+
+                    <div class="form-actions">
+                        <button id="btnResponderPqrs" class="button button-primary" type="submit">Responder y marcar como atendida</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Listado ===== -->
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Bandeja de PQRS</h3>
+                <p>Plazo de referencia: 15 días hábiles para responder (Ley 1755 de 2015).</p>
+            </div>
+
+            <div class="actions">
+                <a class="button button-light" href="/pqrs.html" target="_blank" rel="noopener">Ver página pública</a>
+                <button id="btnActualizarPqrs" class="button button-light" type="button">Actualizar</button>
+                <button id="btnNuevaPqrs" class="button button-primary" type="button">+ Registrar PQRS</button>
+            </div>
+        </div>
+
+        <div class="filters-row">
+            <div class="segmented" id="filtroPqrs">
+                <button type="button" data-filtro="pendientes" class="active">Pendientes</button>
+                <button type="button" data-filtro="atendidas">Atendidas</button>
+                <button type="button" data-filtro="todas">Todas</button>
+            </div>
+
+            <select id="filtroTipoPqrs" aria-label="Filtrar por tipo">
+                <option value="">Todos los tipos</option>
+            </select>
+
+            <div class="search-box">
+                <input id="buscarPqrs" type="search" placeholder="Buscar por número, nombre, correo o texto...">
+            </div>
+        </div>
+
+        <div id="pqrsListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N.°</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Presentada por</th>
+                        <th>Descripción</th>
+                        <th>Origen</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaPqrs">
+                    <tr><td colspan="8">Cargando PQRS...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

@@ -1,0 +1,133 @@
+<section id="vistaTiposPqrs" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Tipos de PQRS registrados</span>
+            <strong id="totalTiposPqrs">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Tipos activos</span>
+            <strong id="tiposPqrsActivos">0</strong>
+            <span class="stat-description">Disponibles para radicar PQRS</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Tipos inactivos</span>
+            <strong id="tiposPqrsInactivos">0</strong>
+            <span class="stat-description">Deshabilitados temporalmente</span>
+        </article>
+    </section>
+
+    <section id="tipoPqrsFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioTipoPqrs">Registrar tipo de PQRS</h3>
+                <p>El código se asigna automáticamente al guardar.</p>
+            </div>
+
+            <button
+                id="btnCerrarTipoPqrs"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="tipoPqrsForm">
+            <input type="hidden" id="tipoPqrsId">
+
+            <div class="form-grid form-grid-2">
+                <label>
+                    Descripción
+                    <input
+                        id="tipoPqrsDescripcion"
+                        type="text"
+                        maxlength="40"
+                        placeholder="Ej. Felicitación"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="tipoPqrsEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="tipoPqrsMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarTipoPqrs"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    class="button button-primary"
+                    type="submit">
+                    Guardar tipo
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de tipos de PQRS</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarTiposPqrs"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevoTipoPqrs"
+                    class="button button-primary"
+                    type="button">
+                    + Nuevo tipo
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarTipoPqrs"
+                type="search"
+                placeholder="Buscar por código o descripción...">
+        </div>
+
+        <div id="tiposPqrsListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaTiposPqrs">
+                    <tr>
+                        <td colspan="4">Cargando tipos de PQRS...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

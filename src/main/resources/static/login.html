@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante | Iniciar sesión</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/login.js" defer></script>
+</head>
+<body class="login-body">
+
+    <main class="login-layout">
+
+        <section class="login-card">
+            <div class="brand login-brand">
+                <span class="brand-icon">R</span>
+                <div>
+                    <h1>Restaurante</h1>
+                    <p>Sistema de gestión</p>
+                </div>
+            </div>
+
+            <div class="login-heading">
+                <h2>Iniciar sesión</h2>
+                <p>Ingresa con tu usuario y contraseña para continuar.</p>
+            </div>
+
+            <div id="loginMensaje" class="message hidden" role="alert"></div>
+
+            <form id="loginForm" class="login-form" novalidate>
+                <label>
+                    Usuario
+                    <input
+                        id="loginUsuario"
+                        type="text"
+                        maxlength="30"
+                        autocomplete="username"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        placeholder="Ej. admin"
+                        required>
+                </label>
+
+                <label>
+                    Contraseña
+                    <span class="password-field">
+                        <input
+                            id="loginPass"
+                            type="password"
+                            maxlength="72"
+                            autocomplete="current-password"
+                            placeholder="Tu contraseña"
+                            required>
+                        <button
+                            id="btnVerPass"
+                            class="password-toggle"
+                            type="button"
+                            aria-label="Mostrar contraseña">
+                            Ver
+                        </button>
+                    </span>
+                </label>
+
+                <button id="btnIngresar" class="button button-primary login-submit" type="submit">
+                    Ingresar
+                </button>
+            </form>
+        </section>
+
+        <p class="login-footer">
+            ¿Eres cliente y tienes una petición, queja o reclamo? <a href="/pqrs.html">Radica tu PQRS aquí</a>
+        </p>
+
+    </main>
+
+</body>
+</html>

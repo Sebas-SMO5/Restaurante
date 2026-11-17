@@ -27,6 +27,13 @@ public class PlatoController {
 
     @PostMapping
     public ResponseEntity<String> registrarPlato(@RequestBody Plato plato) {
+
+        String error = validar(plato);
+
+        if (error != null) {
+            return ResponseEntity.badRequest().body(error);
+        }
+
         boolean registrado = platoDAO.add(plato);
 
         if (registrado) {
@@ -43,6 +50,12 @@ public class PlatoController {
             @PathVariable int id,
             @RequestBody Plato plato) {
 
+        String error = validar(plato);
+
+        if (error != null) {
+            return ResponseEntity.badRequest().body(error);
+        }
+
         plato.setIdPlato(id);
 
         boolean actualizado = platoDAO.update(plato);
@@ -52,6 +65,34 @@ public class PlatoController {
         }
 
         return ResponseEntity.badRequest()
-                .body("No se pudo actualizar el plato.");
+                .body("No se pudo actualizar el plato. Verifica si la descripción ya existe.");
+    }
+
+    /** Devuelve el mensaje de error o null si los datos son válidos. */
+    private String validar(Plato plato) {
+
+        if (plato == null || plato.getDescripcion() == null || plato.getDescripcion().isBlank()) {
+            return "La descripción del plato es obligatoria.";
+        }
+
+        plato.setDescripcion(plato.getDescripcion().trim());
+
+        if (plato.getDescripcion().length() > 40) {
+            return "La descripción admite máximo 40 caracteres.";
+        }
+
+        if (plato.getPrecio() <= 0) {
+            return "El precio debe ser mayor que cero.";
+        }
+
+        if (plato.getIdCategoria() == null || !platoDAO.existeCategoria(plato.getIdCategoria())) {
+            return "Selecciona una categoría válida.";
+        }
+
+        if (plato.getIdEstado() <= 0 || !platoDAO.esEstadoDePlato(plato.getIdEstado())) {
+            return "Selecciona un estado de plato válido (Creado, Disponible, Agotado...).";
+        }
+
+        return null;
     }
 }

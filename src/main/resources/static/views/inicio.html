@@ -1,0 +1,89 @@
+<section id="vistaInicio">
+
+    <div class="saludo">
+        <div>
+            <h3 id="inicioSaludo">Hola</h3>
+            <p id="inicioFecha"></p>
+        </div>
+
+        <div class="actions">
+            <button class="button button-light" type="button" data-ir="cocina">Ver cocina</button>
+            <button class="button button-light" type="button" data-ir="recibos">Cobrar</button>
+            <button class="button button-primary" type="button" data-ir="pedidos">+ Nuevo pedido</button>
+        </div>
+    </div>
+
+    <section class="stats stats-4">
+        <article class="stat-card stat-link" data-ir="recibos" tabindex="0" role="link">
+            <span class="stat-label">Vendido hoy</span>
+            <strong id="kpiVentas">$ 0</strong>
+            <span class="stat-description" id="kpiVentasDetalle">0 recibos</span>
+        </article>
+
+        <article class="stat-card stat-link" data-ir="pedidos" tabindex="0" role="link">
+            <span class="stat-label">Pedidos abiertos</span>
+            <strong id="kpiPedidos">0</strong>
+            <span class="stat-description" id="kpiPedidosDetalle">0 platos en cocina</span>
+        </article>
+
+        <article class="stat-card stat-link" data-ir="recibos" tabindex="0" role="link">
+            <span class="stat-label">Por cobrar</span>
+            <strong id="kpiPorCobrar">$ 0</strong>
+            <span class="stat-description" id="kpiPorCobrarDetalle">0 pedidos finalizados</span>
+        </article>
+
+        <article class="stat-card stat-link" data-ir="pqrs" tabindex="0" role="link">
+            <span class="stat-label">PQRS pendientes</span>
+            <strong id="kpiPqrs">0</strong>
+            <span class="stat-description" id="kpiPqrsDetalle">0 fuera de plazo</span>
+        </article>
+    </section>
+
+    <div class="panels-split dashboard-split">
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Ventas de los últimos 7 días</h3>
+                    <p id="ventasSemanaTotal">Recibos de caja activos.</p>
+                </div>
+            </div>
+
+            <div id="graficoVentas" class="chart-columns" role="img" aria-label="Ventas por día de los últimos 7 días"></div>
+
+            <table class="sr-only" id="tablaVentasSemana">
+                <caption>Ventas por día de los últimos 7 días</caption>
+                <thead><tr><th>Día</th><th>Ventas</th><th>Recibos</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Platos más vendidos</h3>
+                    <p>Unidades cobradas en los últimos 30 días.</p>
+                </div>
+            </div>
+
+            <div id="graficoPlatos" class="chart-bars"></div>
+        </section>
+
+    </div>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Materias primas por reponer</h3>
+                <p>Existencias en o por debajo del stock mínimo.</p>
+            </div>
+
+            <button class="button button-light" type="button" data-ir="materias-primas">Ver materias primas</button>
+        </div>
+
+        <div id="listaStockBajo" class="stock-list"></div>
+    </section>
+
+    <div id="chartTooltip" class="chart-tooltip hidden" role="tooltip"></div>
+
+</section>

@@ -1,4 +1,3 @@
-
 package com.restaurante.backend_restaurante.Model;
 
 import java.math.BigDecimal;
@@ -6,9 +5,8 @@ import java.math.BigDecimal;
 public class Insumo {
 
     private long ins_id;
-    private long sede_id;
-    private long cins_id;
-    private long pres_id;
+    private int cins_id;
+    private int um_id;
     private String ins_nombre;
     private String ins_codigo;
     private String ins_codigo_barras;
@@ -19,27 +17,12 @@ public class Insumo {
     private String ins_imagen;
     private boolean ins_estado;
 
-    public Insumo() {
-    }
+    // Solo lectura: se obtienen con JOIN para mostrar nombres en lugar de códigos.
+    private String cins_descripcion;
+    private String um_descripcion;
+    private String um_abreviatura;
 
-    public Insumo(long ins_id, long sede_id, long cins_id, long pres_id,
-            String ins_nombre, String ins_codigo, String ins_codigo_barras,
-            BigDecimal ins_precio_compra, BigDecimal ins_stock,
-            BigDecimal ins_stock_min, boolean ins_vendible,
-            String ins_imagen, boolean ins_estado) {
-        this.ins_id = ins_id;
-        this.sede_id = sede_id;
-        this.cins_id = cins_id;
-        this.pres_id = pres_id;
-        this.ins_nombre = ins_nombre;
-        this.ins_codigo = ins_codigo;
-        this.ins_codigo_barras = ins_codigo_barras;
-        this.ins_precio_compra = ins_precio_compra;
-        this.ins_stock = ins_stock;
-        this.ins_stock_min = ins_stock_min;
-        this.ins_vendible = ins_vendible;
-        this.ins_imagen = ins_imagen;
-        this.ins_estado = ins_estado;
+    public Insumo() {
     }
 
     public long getIns_id() {
@@ -50,28 +33,20 @@ public class Insumo {
         this.ins_id = ins_id;
     }
 
-    public long getSede_id() {
-        return sede_id;
-    }
-
-    public void setSede_id(long sede_id) {
-        this.sede_id = sede_id;
-    }
-
-    public long getCins_id() {
+    public int getCins_id() {
         return cins_id;
     }
 
-    public void setCins_id(long cins_id) {
+    public void setCins_id(int cins_id) {
         this.cins_id = cins_id;
     }
 
-    public long getPres_id() {
-        return pres_id;
+    public int getUm_id() {
+        return um_id;
     }
 
-    public void setPres_id(long pres_id) {
-        this.pres_id = pres_id;
+    public void setUm_id(int um_id) {
+        this.um_id = um_id;
     }
 
     public String getIns_nombre() {
@@ -144,5 +119,29 @@ public class Insumo {
 
     public void setIns_estado(boolean ins_estado) {
         this.ins_estado = ins_estado;
+    }
+
+    public String getCins_descripcion() {
+        return cins_descripcion;
+    }
+
+    public void setCins_descripcion(String cins_descripcion) {
+        this.cins_descripcion = cins_descripcion;
+    }
+
+    public String getUm_descripcion() {
+        return um_descripcion;
+    }
+
+    public void setUm_descripcion(String um_descripcion) {
+        this.um_descripcion = um_descripcion;
+    }
+
+    public String getUm_abreviatura() {
+        return um_abreviatura;
+    }
+
+    public void setUm_abreviatura(String um_abreviatura) {
+        this.um_abreviatura = um_abreviatura;
     }
 }

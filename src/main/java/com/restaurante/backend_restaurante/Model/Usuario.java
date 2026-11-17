@@ -1,6 +1,8 @@
 
 package com.restaurante.backend_restaurante.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Usuario {
 
     private int usu_id;
@@ -11,6 +13,8 @@ public class Usuario {
     private String usu_correo;
     private Integer perf_id;
     private String usu_login;
+    // Se recibe al registrar/cambiar la contraseña, pero nunca se envía en las respuestas.
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String usu_pass;
     private String usu_estado;
 
