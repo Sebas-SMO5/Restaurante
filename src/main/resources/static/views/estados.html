@@ -1,0 +1,195 @@
+<section id="vistaEstados" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Tipos de estado</span>
+            <strong id="totalTiposEstado">0</strong>
+            <span class="stat-description">Pedido, Plato, PQRS...</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Estados registrados</span>
+            <strong id="totalEstados">0</strong>
+            <span class="stat-description">En todos los tipos</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Estados activos</span>
+            <strong id="estadosActivos">0</strong>
+            <span class="stat-description">Disponibles para seleccionar</span>
+        </article>
+    </section>
+
+    <!-- ===== Formulario de tipo de estado ===== -->
+    <section id="tipoEstadoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioTipoEstado">Registrar tipo de estado</h3>
+                <p>Agrupa los estados de un proceso (por ejemplo, Pedido o Plato).</p>
+            </div>
+
+            <button id="btnCerrarTipoEstado" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <form id="tipoEstadoForm" novalidate>
+            <input type="hidden" id="tipoEstadoId">
+
+            <div class="form-grid form-grid-2">
+                <label>
+                    Descripción
+                    <input id="tipoEstadoDescripcion" type="text" maxlength="40"
+                        placeholder="Ej. Recibo de caja" required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="tipoEstadoEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="tipoEstadoMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarTipoEstado" class="button button-light" type="button">Cancelar</button>
+                <button class="button button-primary" type="submit">Guardar tipo</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ===== Formulario de estado ===== -->
+    <section id="estadoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioEstado">Registrar estado</h3>
+                <p>El código se asigna automáticamente al guardar.</p>
+            </div>
+
+            <button id="btnCerrarEstado" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <form id="estadoForm" novalidate>
+            <input type="hidden" id="estadoId">
+
+            <div class="form-grid form-grid-3-auto">
+                <label>
+                    Descripción
+                    <input id="estadoDescripcion" type="text" maxlength="40"
+                        placeholder="Ej. En camino" required>
+                </label>
+
+                <label>
+                    Tipo de estado
+                    <select id="estadoTipo" required>
+                        <option value="">Seleccione un tipo</option>
+                    </select>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="estadoEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="estadoMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarEstado" class="button button-light" type="button">Cancelar</button>
+                <button class="button button-primary" type="submit">Guardar estado</button>
+            </div>
+        </form>
+    </section>
+
+    <div id="estadosListadoMensaje" class="message hidden" role="status"></div>
+
+    <div class="panels-split">
+
+        <!-- ===== Listado de tipos ===== -->
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Tipos de estado</h3>
+                    <p>Selecciona uno para filtrar sus estados.</p>
+                </div>
+
+                <div class="actions">
+                    <button id="btnNuevoTipoEstado" class="button button-primary" type="button">
+                        + Nuevo tipo
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Estados</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaTiposEstado">
+                        <tr><td colspan="4">Cargando tipos de estado...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== Listado de estados ===== -->
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Estados</h3>
+                    <p>Información consultada desde la base de datos.</p>
+                </div>
+
+                <div class="actions">
+                    <button id="btnActualizarEstados" class="button button-light" type="button">
+                        Actualizar listado
+                    </button>
+
+                    <button id="btnNuevoEstado" class="button button-primary" type="button">
+                        + Nuevo estado
+                    </button>
+                </div>
+            </div>
+
+            <div class="filters-row">
+                <div class="search-box">
+                    <input id="buscarEstado" type="search" placeholder="Buscar estado...">
+                </div>
+
+                <select id="filtroTipoEstado" aria-label="Filtrar por tipo de estado">
+                    <option value="">Todos los tipos</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaEstados">
+                        <tr><td colspan="5">Cargando estados...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+</section>

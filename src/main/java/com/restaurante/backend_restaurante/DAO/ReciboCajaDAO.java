@@ -27,6 +27,7 @@ public class ReciboCajaDAO {
         recibo.setRc_fecha(rs.getDate("rc_fecha"));
         recibo.setPed_id(rs.getInt("ped_id"));
         recibo.setCli_id(rs.getInt("cli_id"));
+        recibo.setFp_id(rs.getInt("fp_id"));
         recibo.setRc_total(rs.getDouble("rc_total"));
         recibo.setRc_observacion(rs.getString("rc_observacion"));
         recibo.setRc_estado(rs.getString("rc_estado"));
@@ -37,7 +38,7 @@ public class ReciboCajaDAO {
     public List<ReciboCaja> getAllRecibosCaja() {
 
         String sql = """
-            SELECT rc_num, usu_id, rc_fecha, ped_id, cli_id,
+            SELECT rc_num, usu_id, rc_fecha, ped_id, cli_id, fp_id,
                    rc_total, rc_observacion, rc_estado
             FROM recibo_caja
             ORDER BY rc_num DESC
@@ -49,7 +50,7 @@ public class ReciboCajaDAO {
     public ReciboCaja getReciboCajaById(int id) {
 
         String sql = """
-            SELECT rc_num, usu_id, rc_fecha, ped_id, cli_id,
+            SELECT rc_num, usu_id, rc_fecha, ped_id, cli_id, fp_id,
                    rc_total, rc_observacion, rc_estado
             FROM recibo_caja
             WHERE rc_num = ?
@@ -68,10 +69,10 @@ public class ReciboCajaDAO {
 
         String sql = """
             INSERT INTO recibo_caja (
-                usu_id, rc_fecha, ped_id, cli_id,
+                usu_id, rc_fecha, ped_id, cli_id, fp_id,
                 rc_total, rc_observacion, rc_estado
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         return jdbcTemplate.update(
@@ -80,6 +81,7 @@ public class ReciboCajaDAO {
                 recibo.getRc_fecha(),
                 recibo.getPed_id(),
                 recibo.getCli_id(),
+                recibo.getFp_id(),
                 recibo.getRc_total(),
                 recibo.getRc_observacion(),
                 recibo.getRc_estado()
@@ -94,6 +96,7 @@ public class ReciboCajaDAO {
                 rc_fecha = ?,
                 ped_id = ?,
                 cli_id = ?,
+                fp_id = ?,
                 rc_total = ?,
                 rc_observacion = ?,
                 rc_estado = ?
@@ -106,6 +109,7 @@ public class ReciboCajaDAO {
                 recibo.getRc_fecha(),
                 recibo.getPed_id(),
                 recibo.getCli_id(),
+                recibo.getFp_id(),
                 recibo.getRc_total(),
                 recibo.getRc_observacion(),
                 recibo.getRc_estado(),

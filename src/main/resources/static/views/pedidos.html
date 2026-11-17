@@ -1,0 +1,193 @@
+<section id="vistaPedidos">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Pedidos abiertos</span>
+            <strong id="pedidosAbiertos">0</strong>
+            <span class="stat-description">Mesas atendiéndose ahora</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Platos en cocina</span>
+            <strong id="platosEnCocina">0</strong>
+            <span class="stat-description">Pendientes por preparar</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Vendido hoy</span>
+            <strong id="ventasHoy">$ 0</strong>
+            <span class="stat-description">Pedidos finalizados hoy</span>
+        </article>
+    </section>
+
+    <!-- ===== Tomar pedido / agregar platos ===== -->
+    <section id="pedidoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioPedido">Nuevo pedido</h3>
+                <p id="subtituloFormularioPedido">Indica la mesa y agrega los platos. Al enviarlo, los platos llegan a cocina.</p>
+            </div>
+
+            <button id="btnCerrarPedido" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <form id="pedidoForm" novalidate>
+            <div class="form-grid pedido-selector">
+                <label id="campoMesa">
+                    Mesa
+                    <input id="pedidoMesa" type="text" maxlength="4" placeholder="Ej. 5" autocomplete="off">
+                </label>
+
+                <label class="form-span-2">
+                    Plato
+                    <select id="pedidoPlato">
+                        <option value="">Seleccione un plato</option>
+                    </select>
+                </label>
+
+                <label>
+                    Cantidad
+                    <input id="pedidoCantidad" type="number" min="1" max="50" step="1" value="1">
+                </label>
+
+                <label class="form-span-2">
+                    Observación para cocina
+                    <input id="pedidoObservacion" type="text" maxlength="100" placeholder="Ej. Sin cebolla">
+                </label>
+
+                <div class="selector-boton">
+                    <button id="btnAgregarPlato" class="button button-light" type="button">+ Agregar plato</button>
+                </div>
+            </div>
+
+            <div class="table-container pedido-items">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plato</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                            <th>Observación</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaItemsNuevos">
+                        <tr><td colspan="6">Aún no has agregado platos.</td></tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">Total</th>
+                            <th id="totalNuevo" colspan="3">$ 0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div id="pedidoMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarPedidoForm" class="button button-light" type="button">Cancelar</button>
+                <button id="btnEnviarPedido" class="button button-primary" type="submit">Enviar a cocina</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ===== Detalle de un pedido ===== -->
+    <section id="pedidoDetalleSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="detalleTitulo">Pedido</h3>
+                <p id="detalleSubtitulo"></p>
+            </div>
+
+            <div class="actions">
+                <button id="btnDetalleAgregar" class="button button-light" type="button">+ Agregar platos</button>
+                <button id="btnDetalleCancelar" class="button button-light button-danger" type="button">Cancelar pedido</button>
+                <button id="btnDetalleFinalizar" class="button button-primary" type="button">Finalizar pedido</button>
+                <button id="btnDetalleCerrar" class="button button-light" type="button">Cerrar</button>
+            </div>
+        </div>
+
+        <div id="detalleMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plato</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                        <th>Observación</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaDetallePedido"></tbody>
+
+                <tfoot>
+                    <tr>
+                        <th colspan="3">Total (sin platos cancelados)</th>
+                        <th id="detalleTotal" colspan="4">$ 0</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== Listado ===== -->
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Pedidos</h3>
+                <p>Del más reciente al más antiguo.</p>
+            </div>
+
+            <div class="actions">
+                <button id="btnActualizarPedidos" class="button button-light" type="button">Actualizar listado</button>
+                <button id="btnNuevoPedido" class="button button-primary" type="button">+ Nuevo pedido</button>
+            </div>
+        </div>
+
+        <div class="filters-row">
+            <div class="segmented" id="filtroEstadoPedido" role="tablist">
+                <button type="button" data-filtro="abiertos" class="active">Abiertos</button>
+                <button type="button" data-filtro="finalizados">Finalizados</button>
+                <button type="button" data-filtro="cancelados">Cancelados</button>
+                <button type="button" data-filtro="todos">Todos</button>
+            </div>
+
+            <div class="search-box">
+                <input id="buscarPedido" type="search" placeholder="Buscar por número, mesa o mesero...">
+            </div>
+        </div>
+
+        <div id="pedidosListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Mesa</th>
+                        <th>Fecha y hora</th>
+                        <th>Mesero</th>
+                        <th>Platos</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaPedidos">
+                    <tr><td colspan="8">Cargando pedidos...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

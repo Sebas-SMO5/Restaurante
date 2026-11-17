@@ -1,0 +1,148 @@
+<section id="vistaConceptos" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Conceptos registrados</span>
+            <strong id="totalConceptos">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Conceptos activos</span>
+            <strong id="conceptosActivos">0</strong>
+            <span class="stat-description">Disponibles para los egresos</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Conceptos inactivos</span>
+            <strong id="conceptosInactivos">0</strong>
+            <span class="stat-description">Deshabilitados temporalmente</span>
+        </article>
+    </section>
+
+    <section id="conceptoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioConcepto">Registrar concepto de pago</h3>
+                <p>Completa la información del concepto.</p>
+            </div>
+
+            <button
+                id="btnCerrarConcepto"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="conceptoForm">
+            <div class="form-grid form-grid-3">
+                <label>
+                    Código
+                    <input
+                        id="conceptoId"
+                        type="number"
+                        min="1"
+                        max="999"
+                        step="1"
+                        placeholder="Ej. 4"
+                        required>
+                </label>
+
+                <label>
+                    Descripción
+                    <input
+                        id="conceptoDescripcion"
+                        type="text"
+                        maxlength="100"
+                        placeholder="Ej. Pago a proveedores"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="conceptoEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <p class="form-note">
+                El código no se puede cambiar después de registrar el concepto.
+            </p>
+
+            <div id="conceptoMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarConcepto"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    id="btnGuardarConcepto"
+                    class="button button-primary"
+                    type="submit">
+                    Guardar concepto
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de conceptos de pago</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarConceptos"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevoConcepto"
+                    class="button button-primary"
+                    type="button">
+                    + Nuevo concepto
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarConcepto"
+                type="search"
+                placeholder="Buscar por código o descripción...">
+        </div>
+
+        <div id="conceptosListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaConceptos">
+                    <tr>
+                        <td colspan="4">Cargando conceptos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

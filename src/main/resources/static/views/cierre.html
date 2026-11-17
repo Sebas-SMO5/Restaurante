@@ -1,0 +1,131 @@
+<section id="vistaCierre">
+
+    <section class="panel no-print">
+        <div class="panel-heading">
+            <div>
+                <h3>Día a consultar</h3>
+                <p>Solo suman los recibos y egresos activos (los anulados no cuentan).</p>
+            </div>
+
+            <div class="actions">
+                <input id="cierreFecha" class="input-fecha" type="date" aria-label="Fecha del cierre">
+                <button id="btnHoyCierre" class="button button-light" type="button">Hoy</button>
+                <button id="btnImprimirCierre" class="button button-light" type="button">Imprimir</button>
+            </div>
+        </div>
+
+        <div id="cierreAviso" class="message hidden" role="status"></div>
+    </section>
+
+    <div class="print-area" id="cierreImprimible">
+
+        <h2 class="print-only" id="cierreTituloImpresion">Cierre de caja</h2>
+
+        <section class="stats stats-4">
+            <article class="stat-card">
+                <span class="stat-label">Ingresos</span>
+                <strong id="cierreIngresos">$ 0</strong>
+                <span class="stat-description">Recibos de caja</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">Egresos</span>
+                <strong id="cierreEgresos">$ 0</strong>
+                <span class="stat-description">Comprobantes de egreso</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">Resultado del día</span>
+                <strong id="cierreNeto">$ 0</strong>
+                <span class="stat-description">Ingresos − egresos</span>
+            </article>
+
+            <article class="stat-card stat-highlight">
+                <span class="stat-label">Efectivo que debe haber en caja</span>
+                <strong id="cierreEsperado">$ 0</strong>
+                <span class="stat-description">Ingresos menos egresos en efectivo</span>
+            </article>
+        </section>
+
+        <div class="panels-split">
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Por forma de pago</h3>
+                        <p>Ingresos y egresos agrupados.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Forma de pago</th>
+                                <th>Ingresos</th>
+                                <th>Egresos</th>
+                                <th>Neto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cierrePorForma"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel" id="cierreRegistroPanel">
+                <div class="panel-heading">
+                    <div>
+                        <h3 id="cierreRegistroTitulo">Cerrar la caja</h3>
+                        <p id="cierreRegistroSubtitulo">Cuenta el efectivo y regístralo.</p>
+                    </div>
+                </div>
+
+                <form id="cierreForm" class="cierre-form no-print" novalidate>
+                    <label>
+                        Efectivo contado en caja
+                        <input id="cierreContado" type="number" min="0" step="50" placeholder="Ej. 350000">
+                    </label>
+
+                    <p id="cierreDiferencia" class="cambio hidden"></p>
+
+                    <label>
+                        Observación
+                        <textarea id="cierreObservacion" rows="3" maxlength="300"
+                            placeholder="Obligatoria si hay sobrante o faltante."></textarea>
+                    </label>
+
+                    <div id="cierreMensaje" class="message hidden" role="alert"></div>
+
+                    <button id="btnRegistrarCierre" class="button button-primary" type="submit">Registrar cierre</button>
+                </form>
+
+                <dl id="cierreGuardado" class="pqrs-datos hidden"></dl>
+            </section>
+        </div>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Movimientos del día</h3>
+                    <p id="cierreMovimientosResumen"></p>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Tipo</th>
+                            <th>Documento</th>
+                            <th>Detalle</th>
+                            <th>Forma de pago</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cierreMovimientos"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+</section>

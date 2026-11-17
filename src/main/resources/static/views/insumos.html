@@ -1,0 +1,177 @@
+<section id="vistaInsumos">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Materias primas registradas</span>
+            <strong id="totalInsumos">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Activas</span>
+            <strong id="insumosActivos">0</strong>
+            <span class="stat-description">Disponibles para usar</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Bajo stock mínimo</span>
+            <strong id="insumosStockBajo">0</strong>
+            <span class="stat-description">Requieren reposición</span>
+        </article>
+    </section>
+
+    <section id="insumoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioInsumo">Registrar materia prima</h3>
+                <p>El código se asigna automáticamente al guardar.</p>
+            </div>
+
+            <button id="btnCerrarInsumo" class="button button-light" type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="insumoForm" novalidate>
+            <input type="hidden" id="ins_id">
+
+            <h4 class="form-section-title">Información general</h4>
+
+            <div class="form-grid">
+                <label>
+                    Nombre
+                    <input id="ins_nombre" type="text" maxlength="150"
+                        placeholder="Ej. Arroz blanco" required>
+                </label>
+
+                <label>
+                    Categoría
+                    <select id="cins_id" required>
+                        <option value="">Seleccione una categoría</option>
+                    </select>
+                </label>
+
+                <label>
+                    Unidad de medida
+                    <select id="um_id" required>
+                        <option value="">Seleccione una unidad</option>
+                    </select>
+                </label>
+
+                <label>
+                    Código interno
+                    <input id="ins_codigo" type="text" maxlength="30" placeholder="Opcional">
+                </label>
+
+                <label>
+                    Código de barras
+                    <input id="ins_codigo_barras" type="text" maxlength="50" placeholder="Opcional">
+                </label>
+
+                <label>
+                    Precio de compra
+                    <input id="ins_precio_compra" type="number" min="0" step="0.01" placeholder="Ej. 4500">
+                </label>
+            </div>
+
+            <h4 class="form-section-title">Inventario</h4>
+
+            <div class="form-grid">
+                <label>
+                    Existencias
+                    <input id="ins_stock" type="number" min="0" step="0.001" placeholder="Ej. 25" required>
+                </label>
+
+                <label>
+                    Stock mínimo
+                    <input id="ins_stock_min" type="number" min="0" step="0.001" placeholder="Ej. 5" required>
+                </label>
+
+                <label>
+                    Imagen (ruta o URL)
+                    <input id="ins_imagen" type="text" maxlength="255" placeholder="Opcional">
+                </label>
+            </div>
+
+            <div class="form-checks">
+                <label>
+                    <input type="checkbox" id="ins_vendible">
+                    Se puede vender directamente
+                </label>
+
+                <label>
+                    <input type="checkbox" id="ins_estado" checked>
+                    Activa
+                </label>
+            </div>
+
+            <div id="insumoMensaje" class="message hidden" role="alert"></div>
+
+            <div class="form-actions">
+                <button id="btnCancelarInsumo" class="button button-light" type="button">
+                    Cancelar
+                </button>
+
+                <button id="btnGuardarInsumo" class="button button-primary" type="submit">
+                    Guardar materia prima
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de materias primas</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button id="btnActualizarInsumos" class="button button-light" type="button">
+                    Actualizar listado
+                </button>
+
+                <button id="btnNuevoInsumo" class="button button-primary" type="button">
+                    + Nueva materia prima
+                </button>
+            </div>
+        </div>
+
+        <div class="filters-row">
+            <div class="search-box">
+                <input id="buscarInsumo" type="search"
+                    placeholder="Buscar por nombre, código o categoría...">
+            </div>
+
+            <select id="filtroCategoriaInsumo" aria-label="Filtrar por categoría">
+                <option value="">Todas las categorías</option>
+            </select>
+        </div>
+
+        <div id="mensajeInsumo" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Existencias</th>
+                        <th>Stock mínimo</th>
+                        <th>Precio compra</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaInsumos">
+                    <tr>
+                        <td colspan="8">Cargando materias primas...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

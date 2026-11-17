@@ -1,12 +1,10 @@
-
 package com.restaurante.backend_restaurante.Model;
-
-
-
 
 public class Cliente {
 
     private int cli_id;
+    private Integer tipo_id;
+    private String cli_documento;
     private String cli_nombre;
     private String cli_apellidos;
     private String cli_direccion;
@@ -14,19 +12,10 @@ public class Cliente {
     private String cli_correo;
     private String cli_estado;
 
-    public Cliente() {
-    }
+    // Solo lectura: se obtiene con un JOIN para mostrar la sigla (CC, NIT...) sin otra consulta.
+    private String tipo_sigla;
 
-    public Cliente(int cli_id, String cli_nombre, String cli_apellidos,
-            String cli_direccion, String cli_telefono, String cli_correo,
-            String cli_estado) {
-        this.cli_id = cli_id;
-        this.cli_nombre = cli_nombre;
-        this.cli_apellidos = cli_apellidos;
-        this.cli_direccion = cli_direccion;
-        this.cli_telefono = cli_telefono;
-        this.cli_correo = cli_correo;
-        this.cli_estado = cli_estado;
+    public Cliente() {
     }
 
     public int getCli_id() {
@@ -35,6 +24,22 @@ public class Cliente {
 
     public void setCli_id(int cli_id) {
         this.cli_id = cli_id;
+    }
+
+    public Integer getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(Integer tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    public String getCli_documento() {
+        return cli_documento;
+    }
+
+    public void setCli_documento(String cli_documento) {
+        this.cli_documento = cli_documento;
     }
 
     public String getCli_nombre() {
@@ -83,5 +88,13 @@ public class Cliente {
 
     public void setCli_estado(String cli_estado) {
         this.cli_estado = cli_estado;
+    }
+
+    public String getTipo_sigla() {
+        return tipo_sigla;
+    }
+
+    public void setTipo_sigla(String tipo_sigla) {
+        this.tipo_sigla = tipo_sigla;
     }
 }

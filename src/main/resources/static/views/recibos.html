@@ -1,0 +1,186 @@
+<section id="vistaRecibos">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Pedidos por cobrar</span>
+            <strong id="recibosPorCobrar">0</strong>
+            <span class="stat-description" id="recibosPorCobrarValor">$ 0 pendientes</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Recaudado hoy</span>
+            <strong id="recibosHoyValor">$ 0</strong>
+            <span class="stat-description" id="recibosHoyCantidad">0 recibos</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Recibos anulados</span>
+            <strong id="recibosAnulados">0</strong>
+            <span class="stat-description">No suman al recaudo</span>
+        </article>
+    </section>
+
+    <!-- ===== Cobrar un pedido ===== -->
+    <section id="cobroSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="cobroTitulo">Cobrar pedido</h3>
+                <p id="cobroSubtitulo"></p>
+            </div>
+
+            <button id="btnCerrarCobro" class="button button-light" type="button">Cerrar</button>
+        </div>
+
+        <div class="cobro-layout">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plato</th>
+                            <th>Cant.</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cobroItems"></tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">Total a cobrar</th>
+                            <th id="cobroTotal">$ 0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <form id="cobroForm" novalidate>
+                <label>
+                    Buscar cliente
+                    <input id="cobroBuscarCliente" type="search" placeholder="Documento o nombre..." autocomplete="off">
+                </label>
+
+                <label>
+                    Cliente
+                    <select id="cobroCliente" required></select>
+                </label>
+
+                <label>
+                    Forma de pago
+                    <select id="cobroFormaPago" required></select>
+                </label>
+
+                <label id="campoRecibido">
+                    Valor recibido (efectivo)
+                    <input id="cobroRecibido" type="number" min="0" step="100" placeholder="Ej. 50000">
+                </label>
+
+                <p id="cobroCambio" class="cambio hidden"></p>
+
+                <label>
+                    Observación
+                    <input id="cobroObservacion" type="text" maxlength="360" placeholder="Opcional">
+                </label>
+
+                <div id="cobroMensaje" class="message hidden" role="alert"></div>
+
+                <button id="btnGenerarRecibo" class="button button-primary" type="submit">Generar recibo</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== Recibo (para ver e imprimir) ===== -->
+    <section id="reciboSection" class="panel hidden">
+        <div class="panel-heading no-print">
+            <div>
+                <h3>Recibo de caja</h3>
+                <p>Puedes imprimirlo o guardarlo como PDF.</p>
+            </div>
+
+            <div class="actions">
+                <button id="btnImprimirRecibo" class="button button-primary" type="button">Imprimir</button>
+                <button id="btnAnularRecibo" class="button button-light button-danger" type="button" data-solo-admin>Anular</button>
+                <button id="btnCerrarRecibo" class="button button-light" type="button">Cerrar</button>
+            </div>
+        </div>
+
+        <div id="reciboMensaje" class="message hidden no-print" role="status"></div>
+
+        <article id="reciboImprimible" class="receipt print-area"></article>
+    </section>
+
+    <!-- ===== Pedidos por cobrar ===== -->
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Pedidos por cobrar</h3>
+                <p>Pedidos finalizados que aún no tienen recibo.</p>
+            </div>
+
+            <button id="btnActualizarRecibos" class="button button-light" type="button">Actualizar</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Mesa</th>
+                        <th>Fecha y hora</th>
+                        <th>Mesero</th>
+                        <th>Platos</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaPorCobrar">
+                    <tr><td colspan="7">Cargando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== Recibos generados ===== -->
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Recibos generados</h3>
+                <p>Del más reciente al más antiguo.</p>
+            </div>
+        </div>
+
+        <div class="filters-row">
+            <div class="segmented" id="filtroRecibos">
+                <button type="button" data-filtro="hoy" class="active">Hoy</button>
+                <button type="button" data-filtro="activos">Activos</button>
+                <button type="button" data-filtro="anulados">Anulados</button>
+                <button type="button" data-filtro="todos">Todos</button>
+            </div>
+
+            <div class="search-box">
+                <input id="buscarRecibo" type="search" placeholder="Buscar por número, cliente, documento o mesa...">
+            </div>
+        </div>
+
+        <div id="recibosListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recibo</th>
+                        <th>Fecha y hora</th>
+                        <th>Cliente</th>
+                        <th>Pedido</th>
+                        <th>Forma de pago</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaRecibos">
+                    <tr><td colspan="8">Cargando recibos...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

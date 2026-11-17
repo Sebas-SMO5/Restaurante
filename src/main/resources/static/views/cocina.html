@@ -1,0 +1,47 @@
+<section id="vistaCocina">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Platos por preparar</span>
+            <strong id="cocinaPlatos">0</strong>
+            <span class="stat-description">Comandas pendientes</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Mesas esperando</span>
+            <strong id="cocinaMesas">0</strong>
+            <span class="stat-description">Pedidos con platos en cocina</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Espera más larga</span>
+            <strong id="cocinaEspera">—</strong>
+            <span class="stat-description">Desde que se tomó el pedido</span>
+        </article>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Comandas</h3>
+                <p id="cocinaActualizado">Se actualiza automáticamente cada 15 segundos.</p>
+            </div>
+
+            <div class="actions">
+                <label class="toggle-auto">
+                    <input id="cocinaAuto" type="checkbox" checked>
+                    Actualizar automáticamente
+                </label>
+
+                <button id="btnActualizarCocina" class="button button-light" type="button">Actualizar ahora</button>
+            </div>
+        </div>
+
+        <div id="cocinaMensaje" class="message hidden" role="status"></div>
+
+        <div id="cocinaTablero" class="kitchen-board">
+            <p class="empty-state">Cargando comandas...</p>
+        </div>
+    </section>
+
+</section>

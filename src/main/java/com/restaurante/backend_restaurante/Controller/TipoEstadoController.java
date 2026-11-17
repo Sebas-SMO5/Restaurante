@@ -55,6 +55,12 @@ public class TipoEstadoController {
                     .body("La descripción y el estado son obligatorios.");
         }
 
+        String error = validar(tipoEstado, 0);
+
+        if (error != null) {
+            return ResponseEntity.badRequest().body(error);
+        }
+
         boolean registrado = tipoEstadoDAO.add(tipoEstado);
 
         if (registrado) {
@@ -84,6 +90,12 @@ public class TipoEstadoController {
                     .body("La descripción y el estado son obligatorios.");
         }
 
+        String error = validar(tipoEstado, id);
+
+        if (error != null) {
+            return ResponseEntity.badRequest().body(error);
+        }
+
         tipoEstado.setTes_id(id);
 
         boolean actualizado = tipoEstadoDAO.update(tipoEstado);
@@ -94,5 +106,32 @@ public class TipoEstadoController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("No se encontró el tipo de estado o no se pudo actualizar.");
+    }
+
+    /** Normaliza y valida largo, estado y descripción repetida. Devuelve el error o null. */
+    private String validar(TipoEstado tipoEstado, int idActual) {
+
+        tipoEstado.setTes_descripcion(tipoEstado.getTes_descripcion().trim());
+        tipoEstado.setTes_estado(tipoEstado.getTes_estado().trim());
+
+        if (tipoEstado.getTes_descripcion().length() > 40) {
+            return "La descripción admite máximo 40 caracteres.";
+        }
+
+        if (!"Activo".equalsIgnoreCase(tipoEstado.getTes_estado())
+                && !"Inactivo".equalsIgnoreCase(tipoEstado.getTes_estado())) {
+            return "El estado debe ser Activo o Inactivo.";
+        }
+
+        boolean repetido = tipoEstadoDAO.getAllTiposEstado().stream()
+                .anyMatch(t -> t.getTes_id() != idActual
+                        && t.getTes_descripcion() != null
+                        && t.getTes_descripcion().trim().equalsIgnoreCase(tipoEstado.getTes_descripcion()));
+
+        if (repetido) {
+            return "Ya existe un tipo de estado con esa descripción.";
+        }
+
+        return null;
     }
 }

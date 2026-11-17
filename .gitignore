@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Datos locales (no subir) ###
+# Copias completas de la base de datos: contienen clientes, usuarios y contraseñas.
+respaldos/
+# Registros y volcados de la JVM.
+*.log
+hs_err_pid*
+replay_pid*

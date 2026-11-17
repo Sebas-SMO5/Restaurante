@@ -1,0 +1,158 @@
+<section id="vistaUnidadesMedida" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Unidades registradas</span>
+            <strong id="totalUnidadesMedida">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Unidades activas</span>
+            <strong id="unidadesMedidaActivas">0</strong>
+            <span class="stat-description">Disponibles para usar</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Unidades inactivas</span>
+            <strong id="unidadesMedidaInactivas">0</strong>
+            <span class="stat-description">Deshabilitadas temporalmente</span>
+        </article>
+    </section>
+
+    <section id="unidadMedidaFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioUnidadMedida">Registrar unidad de medida</h3>
+                <p>Completa la información de la unidad de medida.</p>
+            </div>
+
+            <button
+                id="btnCerrarUnidadMedida"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="unidadMedidaForm">
+            <div class="form-grid form-grid-4">
+                <label>
+                    Código
+                    <input
+                        id="unidadMedidaId"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="Ej. 4"
+                        required>
+                </label>
+
+                <label>
+                    Descripción
+                    <input
+                        id="unidadMedidaDescripcion"
+                        type="text"
+                        maxlength="30"
+                        placeholder="Ej. Kilogramo"
+                        required>
+                </label>
+
+                <label>
+                    Abreviatura
+                    <input
+                        id="unidadMedidaAbreviatura"
+                        type="text"
+                        maxlength="10"
+                        placeholder="Ej. kg"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="unidadMedidaEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <p class="form-note">
+                El código no se puede cambiar después de registrar la unidad de medida.
+            </p>
+
+            <div id="unidadMedidaMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarUnidadMedida"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    id="btnGuardarUnidadMedida"
+                    class="button button-primary"
+                    type="submit">
+                    Guardar unidad
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de unidades de medida</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarUnidadesMedida"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevaUnidadMedida"
+                    class="button button-primary"
+                    type="button">
+                    + Nueva unidad
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarUnidadMedida"
+                type="search"
+                placeholder="Buscar por código, descripción o abreviatura...">
+        </div>
+
+        <div id="unidadesMedidaListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Abreviatura</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaUnidadesMedida">
+                    <tr>
+                        <td colspan="5">Cargando unidades de medida...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

@@ -1,0 +1,133 @@
+<section id="vistaCategoriasInsumo" data-escritura="admin">
+
+    <section class="stats stats-3">
+        <article class="stat-card">
+            <span class="stat-label">Categorías registradas</span>
+            <strong id="totalCategoriasInsumo">0</strong>
+            <span class="stat-description">Registros en el sistema</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Categorías activas</span>
+            <strong id="categoriasInsumoActivas">0</strong>
+            <span class="stat-description">Disponibles para las materias primas</span>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-label">Categorías inactivas</span>
+            <strong id="categoriasInsumoInactivas">0</strong>
+            <span class="stat-description">Deshabilitados temporalmente</span>
+        </article>
+    </section>
+
+    <section id="categoriaInsumoFormSection" class="panel hidden">
+        <div class="panel-heading">
+            <div>
+                <h3 id="tituloFormularioCategoriaInsumo">Registrar categoría de insumo</h3>
+                <p>El código se asigna automáticamente al guardar.</p>
+            </div>
+
+            <button
+                id="btnCerrarCategoriaInsumo"
+                class="button button-light"
+                type="button">
+                Cerrar
+            </button>
+        </div>
+
+        <form id="categoriaInsumoForm">
+            <input type="hidden" id="categoriaInsumoId">
+
+            <div class="form-grid form-grid-2">
+                <label>
+                    Descripción
+                    <input
+                        id="categoriaInsumoDescripcion"
+                        type="text"
+                        maxlength="40"
+                        placeholder="Ej. Mariscos"
+                        required>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="categoriaInsumoEstado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="categoriaInsumoMensaje" class="message hidden" role="status"></div>
+
+            <div class="form-actions">
+                <button
+                    id="btnCancelarCategoriaInsumo"
+                    class="button button-light"
+                    type="button">
+                    Cancelar
+                </button>
+
+                <button
+                    class="button button-primary"
+                    type="submit">
+                    Guardar categoría
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Listado de categorías de insumo</h3>
+                <p>Información consultada desde la base de datos.</p>
+            </div>
+
+            <div class="actions">
+                <button
+                    id="btnActualizarCategoriasInsumo"
+                    class="button button-light"
+                    type="button">
+                    Actualizar listado
+                </button>
+
+                <button
+                    id="btnNuevaCategoriaInsumo"
+                    class="button button-primary"
+                    type="button">
+                    + Nueva categoría
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                id="buscarCategoriaInsumo"
+                type="search"
+                placeholder="Buscar por código o descripción...">
+        </div>
+
+        <div id="categoriasInsumoListadoMensaje" class="message hidden" role="status"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaCategoriasInsumo">
+                    <tr>
+                        <td colspan="4">Cargando categorías de insumo...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</section>

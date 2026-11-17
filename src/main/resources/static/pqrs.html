@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante | PQRS</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/pqrs-publico.js" defer></script>
+</head>
+<body class="login-body">
+
+    <main class="login-layout">
+
+        <section class="login-card pqrs-card">
+            <div class="brand login-brand">
+                <span class="brand-icon">R</span>
+                <div>
+                    <h1>Restaurante</h1>
+                    <p>Peticiones, quejas, reclamos y sugerencias</p>
+                </div>
+            </div>
+
+            <div class="segmented pqrs-tabs" role="tablist">
+                <button type="button" data-tab="radicar" class="active" role="tab">Radicar PQRS</button>
+                <button type="button" data-tab="consultar" role="tab">Consultar respuesta</button>
+            </div>
+
+            <!-- ===== Radicar ===== -->
+            <div id="tabRadicar">
+                <div class="login-heading">
+                    <h2>Cuéntanos qué pasó</h2>
+                    <p>Te daremos un número de radicado para que consultes la respuesta.</p>
+                </div>
+
+                <div id="radicarMensaje" class="message hidden" role="alert"></div>
+
+                <form id="radicarForm" class="login-form" novalidate>
+                    <label>
+                        Tipo
+                        <select id="pubTipo" required>
+                            <option value="">Cargando...</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Nombre completo
+                        <input id="pubNombre" type="text" maxlength="80" autocomplete="name" required>
+                    </label>
+
+                    <label>
+                        Correo electrónico
+                        <input id="pubCorreo" type="email" maxlength="60" autocomplete="email" required>
+                    </label>
+
+                    <label>
+                        Teléfono
+                        <input id="pubTelefono" type="tel" maxlength="20" autocomplete="tel" required>
+                    </label>
+
+                    <label>
+                        Descripción
+                        <textarea id="pubDescripcion" rows="5" maxlength="2000"
+                            placeholder="Describe lo ocurrido, la fecha y qué esperas que hagamos." required></textarea>
+                        <small id="pubContador" class="contador">0 / 2000</small>
+                    </label>
+
+                    <!-- Campo trampa contra robots: las personas no lo ven. -->
+                    <label class="campo-trampa" aria-hidden="true">
+                        Sitio web
+                        <input id="pubSitioWeb" type="text" tabindex="-1" autocomplete="off">
+                    </label>
+
+                    <button id="btnRadicar" class="button button-primary login-submit" type="submit">Enviar PQRS</button>
+                </form>
+
+                <div id="radicadoOk" class="radicado hidden">
+                    <span>Tu número de radicado es</span>
+                    <strong id="radicadoNumero"></strong>
+                    <p>Guárdalo junto con tu correo. Con ambos podrás consultar la respuesta en la pestaña “Consultar respuesta”.</p>
+                    <button id="btnOtraPqrs" class="button button-light" type="button">Radicar otra PQRS</button>
+                </div>
+            </div>
+
+            <!-- ===== Consultar ===== -->
+            <div id="tabConsultar" class="hidden">
+                <div class="login-heading">
+                    <h2>Consulta tu PQRS</h2>
+                    <p>Usa el número de radicado y el correo con el que la registraste.</p>
+                </div>
+
+                <div id="consultarMensaje" class="message hidden" role="alert"></div>
+
+                <form id="consultarForm" class="login-form" novalidate>
+                    <label>
+                        Número de radicado
+                        <input id="consNumero" type="number" min="1" step="1" required>
+                    </label>
+
+                    <label>
+                        Correo electrónico
+                        <input id="consCorreo" type="email" maxlength="60" required>
+                    </label>
+
+                    <button id="btnConsultar" class="button button-primary login-submit" type="submit">Consultar</button>
+                </form>
+
+                <article id="consultaResultado" class="consulta-resultado hidden"></article>
+            </div>
+        </section>
+
+        <p class="login-footer">
+            ¿Trabajas en el restaurante? <a href="/login.html">Inicia sesión</a>
+        </p>
+
+    </main>
+
+</body>
+</html>
