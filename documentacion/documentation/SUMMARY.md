@@ -29,6 +29,17 @@
 * [Estructura del backend](referencia-tecnica/estructura-backend.md)
 * [Glosario técnico](referencia-tecnica/glosario.md)
 
+## Manual de usuario
+
+* [Manual de usuario](manual-de-usuario/README.md)
+  * [Interfaz de trabajo](manual-de-usuario/interfaz-de-trabajo.md)
+  * [Usuarios y perfiles](manual-de-usuario/usuarios-y-perfiles.md)
+  * [Inicio, Pedidos y Cocina](manual-de-usuario/operativa-pedidos-y-cocina.md)
+  * [Recibos, Egresos y Cierre de caja](manual-de-usuario/operativa-caja.md)
+  * [PQRS, catálogos y usuarios](manual-de-usuario/operativa-pqrs-catalogos-usuarios.md)
+  * [Anexos](manual-de-usuario/anexos.md)
+  * [Glosario](manual-de-usuario/glosario.md)
+
 ***
 
 * [Integrantes del equipo](integrantes-del-equipo.md)
