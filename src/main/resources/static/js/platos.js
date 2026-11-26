@@ -164,12 +164,12 @@ const vistas = {
         descripcion: "Administra las formas de pago registradas."
     },
     "usuario": {
-        modulo: "PQRS",
+        modulo: "CONFIGURACIÓN",
         titulo: "Gestión de usuarios",
         descripcion: "Consulta y administra los usuarios del sistema."
     },
     "rol": {
-        modulo: "PQRS",
+        modulo: "CONFIGURACIÓN",
         titulo: "Gestión de roles",
         descripcion: "Administra los roles de los usuarios."
     },
@@ -857,4 +857,10 @@ document.getElementById("platoForm").addEventListener("submit", async evento => 
     }
 });
 
-seleccionarVista("inicio");
+// Se espera a que carguen todos los scripts (inicio.js va después de este archivo);
+// si no, a veces Inicio mostraba "No se encontró la función inicializarInicio".
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => seleccionarVista("inicio"));
+} else {
+    seleccionarVista("inicio");
+}

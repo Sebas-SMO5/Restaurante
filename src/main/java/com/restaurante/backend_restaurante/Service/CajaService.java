@@ -7,6 +7,7 @@ import com.restaurante.backend_restaurante.Model.CajaVista;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -47,6 +48,8 @@ public class CajaService {
         if (cobro == null || cobro.ped_id() == null || cobro.cli_id() == null || cobro.fp_id() == null) {
             throw new ReglaNegocioException("Selecciona el pedido, el cliente y la forma de pago.");
         }
+
+        exigirCajaAbierta(LocalDate.now(), "cobrar más pedidos hoy");
 
         Integer estadoPedido = dao.estadoPedido(cobro.ped_id());
 
@@ -109,6 +112,8 @@ public class CajaService {
             throw new ReglaNegocioException("El recibo ya está anulado.");
         }
 
+        exigirCajaAbierta(recibo.rc_fecha().toLocalDate(), "anular sus recibos");
+
         String texto = exigirMotivo(motivo);
         String anterior = recibo.rc_observacion() == null || recibo.rc_observacion().isBlank()
                 ? ""
@@ -127,6 +132,8 @@ public class CajaService {
         if (e == null || e.conceptoEgreso_codigo() == null || e.fp_id() == null) {
             throw new ReglaNegocioException("Selecciona el concepto y la forma de pago.");
         }
+
+        exigirCajaAbierta(LocalDate.now(), "registrar más egresos hoy");
 
         if (!dao.conceptoActivo(e.conceptoEgreso_codigo())) {
             throw new ReglaNegocioException("El concepto seleccionado no existe o está inactivo.");
@@ -184,11 +191,20 @@ public class CajaService {
             throw new ReglaNegocioException("El comprobante ya está anulado.");
         }
 
+        exigirCajaAbierta(egreso.fecha_documento().toLocalDate(), "anular sus comprobantes");
+
         String texto = exigirMotivo(motivo);
         dao.anularEgreso(id, recortar(egreso.detalle() + " | ANULADO: " + texto, 250));
     }
 
     // =================================================================
+
+    /** Después del cierre, los totales de ese día no pueden cambiar. */
+    private void exigirCajaAbierta(LocalDate dia, String accion) {
+        if (dao.cajaCerrada(dia)) {
+            throw new ReglaNegocioException("La caja del " + dia + " ya fue cerrada. Ya no se permite " + accion + ".");
+        }
+    }
 
     private String exigirMotivo(String motivo) {
         String texto = motivo == null ? "" : motivo.trim();

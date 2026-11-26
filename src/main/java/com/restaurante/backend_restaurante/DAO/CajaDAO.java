@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -143,6 +144,11 @@ public class CajaDAO {
 
     public boolean conceptoActivo(int conId) {
         return contar("SELECT COUNT(*) FROM concepto WHERE con_id = ? AND LOWER(con_estado) = 'activo'", conId) > 0;
+    }
+
+    /** Indica si la caja de ese día ya tiene un cierre registrado. */
+    public boolean cajaCerrada(LocalDate dia) {
+        return contar("SELECT COUNT(*) FROM cierre_caja WHERE cc_fecha = ?", java.sql.Date.valueOf(dia)) > 0;
     }
 
     /** Platos cobrables del pedido agrupados por plato y precio: {pla_id, cantidad, precio}. */

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Reglas de permisos por rol.
@@ -41,6 +42,22 @@ public class Permisos {
             "/api/egresos"
     );
 
+    /**
+     * Rutas genéricas (CRUD antiguo) de pedidos, recibos, comandas y PQRS.
+     * Escribir por ellas se salta las reglas del negocio (por ejemplo, cambiar el total
+     * de un recibo o reabrir un pedido cerrado), así que solo un administrador puede usarlas.
+     * El trabajo diario va por las rutas del flujo: /api/pedidos/completo, /api/recibos-caja/cobrar,
+     * /api/pqrs/registrar, etc., que no coinciden con estos patrones.
+     */
+    public static final List<Pattern> ESCRITURA_DIRECTA_ADMIN = List.of(
+            Pattern.compile("^/api/pedidos(/\\d+)?/?$"),
+            Pattern.compile("^/api/pedidos-detalle(/\\d+)?/?$"),
+            Pattern.compile("^/api/recibos-caja(/\\d+)?/?$"),
+            Pattern.compile("^/api/recibos-caja-detalle(/.*)?$"),
+            Pattern.compile("^/api/comandas(/.*)?$"),
+            Pattern.compile("^/api/pqrs(/\\d+)?/?$")
+    );
+
     private final List<String> rolesAdmin;
 
     public Permisos(@Value("${app.seguridad.roles-admin:Admin,Administrador}") String rolesAdmin) {
@@ -71,6 +88,10 @@ public class Permisos {
 
         if (!esConsulta && coincide(ruta, ESCRITURA_ADMIN)) {
             return "Tu rol solo permite consultar esta información. Solo un administrador puede modificarla.";
+        }
+
+        if (!esConsulta && ESCRITURA_DIRECTA_ADMIN.stream().anyMatch(patron -> patron.matcher(ruta).matches())) {
+            return "Esta operación se hace desde la pantalla correspondiente del sistema (Pedidos, Cocina, Recibos o PQRS).";
         }
 
         return null;
