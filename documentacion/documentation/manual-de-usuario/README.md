@@ -13,7 +13,7 @@ icon: book-open
 | Proyecto | Sistema de Gestión para Restaurante |
 | Versión | 1.1 |
 | Fecha | 25/11/2026 |
-| Elaborado por | [Por completar: nombre del autor o grupo] |
+| Elaborado por | Equipo MRGG: Sebastian Mora Osorio, María Camila Ramirez Caro, María de los Ángeles Gutiérrez López y Juan Sebastián Granados Gómez |
 | Asignatura | [Por completar] |
 | Docente | [Por completar] |
 | Dirigido a | Administradores y auxiliares del restaurante (meseros, cocina y caja) |
@@ -22,8 +22,8 @@ icon: book-open
 
 | Versión | Fecha | Autor | Descripción del cambio |
 | --- | --- | --- | --- |
-| 1.1 | 25/11/2026 | [Por completar] | Estructura según las guías de manual de usuario, capturas de pantalla, mensajes de error, navegación, preguntas frecuentes y glosario |
-| 1.0 | 19/11/2026 | [Por completar] | Versión inicial |
+| 1.1 | 25/11/2026 | Equipo MRGG | Estructura según las guías de manual de usuario, capturas de pantalla, mensajes de error, navegación, preguntas frecuentes y glosario |
+| 1.0 | 19/11/2026 | Equipo MRGG | Versión inicial |
 
 ## Contenido
 

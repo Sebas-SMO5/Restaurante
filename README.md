@@ -63,8 +63,8 @@ Antes de apagar el computador, detén MySQL con **Stop** en XAMPP para no dañar
 
 | Integrante | Rol |
 | --- | --- |
-| Sebastián Mora Osorio | Líder del equipo y desarrollador backend |
-| María Camila Ramírez Caro | Diseñadora de sistemas y frontend |
+| Sebastian Mora Osorio | Líder del equipo y desarrollador backend |
+| María Camila Ramirez Caro | Diseñadora de sistemas y frontend |
 | María de los Ángeles Gutiérrez López | Tester |
 | Juan Sebastián Granados Gómez | Analista de sistemas |
 
